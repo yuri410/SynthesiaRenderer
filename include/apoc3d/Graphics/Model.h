@@ -125,16 +125,7 @@ namespace Apoc3D
 			virtual RenderOperationBuffer* GetRenderOperation(int lod);
 			RenderOperationBuffer* GetRenderOperationSubEntity(int index);
 
-			RenderOperationBuffer* GetRenderOperationSimple()
-			{
-				if (!m_isOpBufferBuilt)
-				{
-					BuildROPBuffer();
-					m_isOpBufferBuilt = true;
-				}
-
-				return &m_opBuffer;
-			}
+			RenderOperationBuffer* GetRenderOperationSimple();
 			RenderOperationBuffer* GetRenderOperationSubEntitySimple(int index);
 			RenderOperationBuffer* GetRenderOperationSubEntityRaw(int index);
 
@@ -184,21 +175,10 @@ namespace Apoc3D
 			void ControlRigidAnimation(AnimationControl ctrl);
 			void ControlMaterialAnimation(AnimationControl ctrl);
 
-			void RigidAnim_Competed()
-			{
-				m_rigidAnimCompleted = true;
-				m_eventAnimCompleted.Invoke(ANIMTYPE_Rigid);
-			}
-			void SkinAnim_Completed()
-			{
-				m_skinAnimCompleted = true;
-				m_eventAnimCompleted.Invoke(ANIMTYPE_Skinned);
-			}
-			void MtrlAnim_Completed()
-			{
-				m_mtrlAnimCompleted = true;
-				m_eventAnimCompleted.Invoke(ANIMTYPE_Material);
-			}
+			void RigidAnim_Competed();
+			void SkinAnim_Completed();
+			void MtrlAnim_Completed();
+
 			void InitializeAnimation();
 			void UpdateAnimation();
 

@@ -42,7 +42,7 @@ namespace Apoc3D
 {
 	namespace ProjectSystem
 	{
-		struct ModelPresetMaterial
+		struct APAPI ModelPresetMaterial
 		{
 			String NamePattern;
 			IO::MaterialData* Data = nullptr;

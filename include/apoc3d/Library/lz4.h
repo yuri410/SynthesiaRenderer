@@ -33,6 +33,8 @@
 */
 #pragma once
 
+#include "Apoc3D/ApocExportSettings.h"
+
 #if defined (__cplusplus)
 extern "C" {
 #endif
@@ -96,7 +98,7 @@ LZ4_compressBound() :
     return : maximum output size in a "worst case" scenario
              or 0, if input size is too large ( > LZ4_MAX_INPUT_SIZE)
 */
-int LZ4_compressBound(int isize);
+APAPI int LZ4_compressBound(int isize);
 
 
 /*

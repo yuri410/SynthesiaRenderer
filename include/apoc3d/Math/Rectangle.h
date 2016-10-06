@@ -198,26 +198,8 @@ namespace Apoc3D
 			}
 
 
-			void SplitVert(int32 ypos, Rectangle& top, Rectangle& bottom)
-			{
-				top = *this;
-				top.Height = ypos;
-
-				bottom = *this;
-				bottom.Y = Y + ypos;
-				bottom.Height = Height - (ypos - Y);
-			}
-
-			void SplitHorizontal(int32 xpos, Rectangle& left, Rectangle& right)
-			{
-				left = *this;
-				left.X = X;
-				left.Width = xpos;
-
-				right = *this;
-				right.X = X + xpos;
-				right.Width = Width - (xpos - X);
-			}
+			void SplitVert(int32 ypos, Rectangle& top, Rectangle& bottom);
+			void SplitHorizontal(int32 xpos, Rectangle& left, Rectangle& right);
 
 			void DivideTo9Regions(int32 xpad, int32 ypad, Rectangle(&result)[9]) const { DivideTo9Regions(xpad, xpad, ypad, ypad, result); }
 

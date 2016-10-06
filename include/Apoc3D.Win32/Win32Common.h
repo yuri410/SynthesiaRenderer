@@ -3,6 +3,7 @@
 #define APOC3D_WIN32_COMMON_H
 
 #include "apoc3d/Common.h"
+#include "apoc3d/Core/Plugin.h"
 
 #include <Windows.h>
 
@@ -18,7 +19,7 @@ namespace Apoc3D
 
 	namespace Win32
 	{
-		extern const wchar_t WindowClass[];
+		PLUGINAPI extern const wchar_t WindowClass[];
 
 		class GameClock;
 		class GameWindow;

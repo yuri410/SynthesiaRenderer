@@ -321,7 +321,7 @@ namespace Apoc3D
 	public:
 		typedef HashMap<String, ConfigurationSection*> IncludeTable;
 
-		struct NumberRange
+		struct APAPI NumberRange
 		{
 			int32 Start;
 			int32 End;

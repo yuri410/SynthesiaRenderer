@@ -10,7 +10,7 @@ using namespace Apoc3D::Config;
 
 namespace Apoc3D
 {
-	class ProjectTextureResizingOptions
+	class APAPI ProjectTextureResizingOptions
 	{
 	public:
 

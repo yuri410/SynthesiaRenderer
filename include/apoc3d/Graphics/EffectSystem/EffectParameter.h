@@ -165,12 +165,12 @@ namespace Apoc3D
 			 */
 			namespace RendererEffectParams
 			{
-				extern Camera* CurrentCamera;
-				extern Vector3 LightDirection;
-				extern Vector3 LightPosition;
-				extern Color4 LightAmbient;
-				extern Color4 LightDiffuse;
-				extern Color4 LightSpecular;
+				APAPI extern Camera* CurrentCamera;
+				APAPI extern Vector3 LightDirection;
+				APAPI extern Vector3 LightPosition;
+				APAPI extern Color4 LightAmbient;
+				APAPI extern Color4 LightDiffuse;
+				APAPI extern Color4 LightSpecular;
 
 				inline void Reset()
 				{

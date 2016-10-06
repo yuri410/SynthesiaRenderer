@@ -15,7 +15,7 @@ namespace Apoc3D
 {
 	namespace Input
 	{
-		class FrameInputData
+		class APAPI FrameInputData
 		{
 		public:
 			struct FrameInfo
@@ -70,7 +70,7 @@ namespace Apoc3D
 			int32 m_numBlocksRead;
 		};
 
-		class InputPlayer
+		class APAPI InputPlayer
 		{
 		public:
 			InputPlayer(const String& file, const String& clientVersion);
@@ -89,7 +89,7 @@ namespace Apoc3D
 			Stream* m_inputStream;
 		};
 
-		class InputRecorder
+		class APAPI InputRecorder
 		{
 		public:
 			InputRecorder(uint64 machineID, const String& clientVersion, bool isLiveStream, Stream* outStream);

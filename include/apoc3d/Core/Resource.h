@@ -87,12 +87,7 @@ namespace Apoc3D
 			 *  Get the generation number.
 			 *  Only returns valid if the resource is managed and async.
 			 */
-			int GetGeneration() const 
-			{
-				if (m_generation)
-					return m_generation->Generation;
-				return -1;
-			}
+			int GetGeneration() const;
 			int getReferenceCount() const { return m_refCount; }
 
 			/** 

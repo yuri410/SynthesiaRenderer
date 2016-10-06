@@ -217,50 +217,14 @@ namespace Apoc3D
 		{
 			RTTI_DERIVED(VirtualStream, Stream);
 		public:
-			VirtualStream(Stream* strm)
-				: m_baseStream(strm), m_isOutput(true), m_length(strm->getLength())
-			{
-				strm->setPosition(0);
-			}
-			VirtualStream(Stream* strm, int64 baseOffset)
-				: m_baseStream(strm), m_isOutput(true), m_baseOffset(baseOffset)
-			{
-				strm->setPosition(baseOffset);
-			}
+			VirtualStream(Stream* strm);
+			VirtualStream(Stream* strm, int64 baseOffset);
+			VirtualStream(Stream* strm, int64 baseOffset, int64 length);
+			VirtualStream(Stream* strm, int64 baseOffset, int64 length, bool releaseStream);
+			~VirtualStream();
 
-			VirtualStream(Stream* strm, int64 baseOffset, int64 length)
-				: VirtualStream(strm, baseOffset, length, false) { }
-
-			VirtualStream(Stream* strm, int64 baseOffset, int64 length, bool releaseStream)
-				: m_baseStream(strm), m_length(length), m_baseOffset(baseOffset), m_releaseStream(releaseStream)
-			{
-				strm->setPosition(baseOffset);
-			}
-
-			~VirtualStream()
-			{
-				if (m_releaseStream)
-					DELETE_AND_NULL(m_baseStream);
-			}
-
-			VirtualStream(VirtualStream&& other)
-				: m_baseStream(other.m_baseStream), m_length(other.m_length), m_baseOffset(other.m_baseOffset),
-				m_isOutput(other.m_isOutput), m_releaseStream(other.m_releaseStream)
-			{
-				other.m_releaseStream = false;
-				other.m_baseStream = 0;
-			}
-			
-			VirtualStream& operator=(VirtualStream&& other)
-			{
-				if (this != &other)
-				{
-					this->~VirtualStream();
-					new (this)VirtualStream(std::move(other));
-				}
-				return *this;
-			}
-
+			VirtualStream(VirtualStream&& other);
+			VirtualStream& operator=(VirtualStream&& other);
 
 			VirtualStream(const VirtualStream&) = delete;
 			VirtualStream& operator=(const VirtualStream&) = delete;

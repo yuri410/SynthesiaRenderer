@@ -53,7 +53,7 @@ namespace Apoc3D
 
 			char* ContentData = nullptr;		/** Packed pixel data. */
 
-			TextureLevelData() { }
+			TextureLevelData();
 			~TextureLevelData();
 			
 			TextureLevelData(TextureLevelData&& rhs);
@@ -94,8 +94,8 @@ namespace Apoc3D
 			int32 LevelCount;
 			uint32 Flags;
 
-			TextureData() { }
-			~TextureData() { }
+			TextureData();
+			~TextureData();
 			
 			TextureData(TextureData&& rhs);
 			TextureData& operator=(TextureData&& rhs);

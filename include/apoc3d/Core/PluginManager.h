@@ -46,7 +46,7 @@ namespace Apoc3D
 		{
 			SINGLETON_DECL(PluginManager);
 		public:
-			PluginManager() { }
+			PluginManager();
 			~PluginManager();
 
 			PluginLoadCallBack& eventPluginLoad() { return m_eventPluginLoad; }

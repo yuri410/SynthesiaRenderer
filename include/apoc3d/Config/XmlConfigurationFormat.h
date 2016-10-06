@@ -47,10 +47,8 @@ namespace Apoc3D
 			virtual void Load(const ResourceLocation& rl, Configuration* config) override;
 			virtual void Save(Configuration* config, Stream& strm) override;
 
-			List<String> GetSupportedFileSystemExtensions() override
-			{
-				return { L"xml" };
-			}
+			List<String> GetSupportedFileSystemExtensions() override;
+
 		private:
 			/** Saves a ConfigurationSection sub tree to the tiny xml node, recursively. */
 			void SaveNode(TiXmlNode* node, ConfigurationSection* parent);

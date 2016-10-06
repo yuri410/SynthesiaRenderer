@@ -279,7 +279,7 @@ namespace Apoc3D
 				expf(-(n * n) / (2 * theta * theta)));
 		}
 
-		void ComputeGaussianFilter(float dx, float dy, int32 sampleCount,
+		APAPI void ComputeGaussianFilter(float dx, float dy, int32 sampleCount,
 			float blurAmount, float kernelScale, float* sampleWeights, Vector4* sampleOffsets);
 	}
 }

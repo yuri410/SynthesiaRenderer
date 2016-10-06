@@ -59,18 +59,7 @@ namespace Apoc3D
 			/*
 			 *  Check if a bounding sphere is intersecting the frustum
 			 */
-			bool Intersects(const BoundingSphere& sp) const
-			{
-				for (int i = 0; i < ClipPlaneCount; i++)
-				{
-					float d = m_planes[i].Dot3(sp.Center);
-					if (d <= -sp.Radius)
-					{
-						return false;
-					}
-				}
-				return true;
-			}
+			bool Intersects(const BoundingSphere& sp) const;
 
 			/**
 			 *  Update the frustum with new view and projection matrix.
@@ -83,8 +72,10 @@ namespace Apoc3D
 			void Update(const Matrix& viewProj);
 
 			const Plane& getPlane(FrustumPlane p) const { return m_planes[static_cast<int32>(p)]; }
+
 		private:
-			const static int ClipPlaneCount = 6;
+			static const int ClipPlaneCount = 6;
+
 			Plane m_planes[ClipPlaneCount];
 
 		};

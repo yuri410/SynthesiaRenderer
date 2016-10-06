@@ -33,6 +33,7 @@
 */
 #pragma once
 
+#include "Apoc3D/ApocExportSettings.h"
 
 #if defined (__cplusplus)
 extern "C" {
@@ -63,7 +64,7 @@ LZ4_compress_limitedOutput() :
 */
 
 
-int LZ4_compressHC2 (const char* source, char* dest, int inputSize, int compressionLevel);
+APAPI int LZ4_compressHC2 (const char* source, char* dest, int inputSize, int compressionLevel);
 int LZ4_compressHC2_limitedOutput (const char* source, char* dest, int inputSize, int maxOutputSize, int compressionLevel);
 /*
     Same functions as above, but with programmable 'compressionLevel'.

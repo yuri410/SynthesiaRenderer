@@ -42,13 +42,7 @@ namespace Apoc3D
 			RTTI_BASE;
 		public:
 
-			Camera()
-			{
-				m_view.LoadIdentity();
-				m_invView.LoadIdentity();
-				m_proj.LoadIdentity();
-				m_viewProj.LoadIdentity();
-			}
+			Camera();
 			Camera(const Matrix& view, const Matrix& proj);
 			~Camera() { }
 
@@ -92,57 +86,15 @@ namespace Apoc3D
 			/** Gets the position of the view point */
 			const Vector3& getPosition() const { return m_position; }
 			
-			void MoveForward()
-			{
-				Vector3 dir = m_invView.GetZ();
-				dir.NormalizeInPlace();
-				Move(dir);
-			}
-			void MoveBackward()
-			{
-				Vector3 dir = -m_invView.GetZ();
-				dir.NormalizeInPlace();
-				Move(dir);
-			}
-			void MoveLeft()
-			{
-				Vector3 dir = -m_invView.GetX();
-				dir.NormalizeInPlace();
-				Move(dir);
-			}
-			void MoveRight() 
-			{
-				Vector3 dir = m_invView.GetX();
-				dir.NormalizeInPlace();
-				Move(dir);
-			}
-			void MoveUp()
-			{
-				Vector3 dir = m_invView.GetY();
-				dir.NormalizeInPlace();
-				Move(dir);
-			}
-			void MoveDown() 
-			{
-				Vector3 dir = -m_invView.GetY();
-				dir.NormalizeInPlace();
-				Move(dir);
-			}
-			void Move(const Vector3 &dir)
-			{
-				m_velChange += dir;
-			}
+			void MoveForward();
+			void MoveBackward();
+			void MoveLeft();
+			void MoveRight();
+			void MoveUp();
+			void MoveDown();
+			void Move(const Vector3 &dir);
 			
-			void Turn(float dx, float dy)
-			{
-				m_rotX += ToRadian(dx);
-				m_rotY += ToRadian(dy);
-
-				if (m_rotY < ToRadian(-89))
-					m_rotY = ToRadian(-89);
-				else if (m_rotY > ToRadian(89))
-					m_rotY = ToRadian(89);
-			}
+			void Turn(float dx, float dy);
 
 			void Update(const GameTime* time);
 			void UpdateTransform();

@@ -74,113 +74,113 @@ namespace Apoc3D
 
 			Stream* GetDataStream(const KeyType& name) const;
 
-			void GetAuto(const KeyType& name, int64& value)		{ value = GetInt64(name); }
-			void GetAuto(const KeyType& name, int32& value)		{ value = GetInt32(name); }
-			void GetAuto(const KeyType& name, int16& value)		{ value = GetInt16(name); }
-			void GetAuto(const KeyType& name, uint64& value)	{ value = GetUInt64(name); }
-			void GetAuto(const KeyType& name, uint32& value)	{ value = GetUInt32(name); }
-			void GetAuto(const KeyType& name, uint16& value)	{ value = GetUInt16(name); }
-			void GetAuto(const KeyType& name, float& value)		{ value = GetSingle(name); }
-			void GetAuto(const KeyType& name, double& value)	{ value = GetDouble(name); }
-			void GetAuto(const KeyType& name, bool& value)		{ value = GetBool(name); }
-			void GetAuto(const KeyType& name, Vector2& vec)		{ GetVector2(name, vec); }
-			void GetAuto(const KeyType& name, Vector3& vec)		{ GetVector3(name, vec); }
-			void GetAuto(const KeyType& name, Vector4& vec)		{ GetVector4(name, vec); }
-			void GetAuto(const KeyType& name, Matrix& mat)		{ GetMatrix(name, mat); }
-			void GetAuto(const KeyType& name, Quaternion& quad)	{ GetQuaternion(name, quad); }
-			void GetAuto(const KeyType& name, Color4& clr)		{ GetColor4(name, clr); }
-			void GetAuto(const KeyType& name, Plane& plane)		{ GetPlane(name, plane); }
-			void GetAuto(const KeyType& name, Apoc3D::Math::Rectangle& rect)	{ GetRectangle(name, rect); }
-			void GetAuto(const KeyType& name, Apoc3D::Math::RectangleF& rect)	{ GetRectangleF(name, rect); }
-			void GetAuto(const KeyType& name, Point& pt)				{ GetPoint(name, pt); }
-			void GetAuto(const KeyType& name, PointF& pt)				{ GetPointF(name, pt); }
-			void GetAuto(const KeyType& name, Apoc3D::Math::Size& sz)	{ GetMathSize(name, sz); }
-			void GetAuto(const KeyType& name, BoundingBox& bb)			{ GetBoundingBox(name, bb); }
-			void GetAuto(const KeyType& name, BoundingSphere& bs)		{ GetBoundingSphere(name, bs); }
-			void GetAuto(const KeyType& name, Ray& r)					{ GetRay(name, r); }
-			void GetAuto(const KeyType& name, Viewport& vp)				{ GetViewport(name, vp); }
-			void GetAuto(const KeyType& name, String& str)				{ GetString(name, str); }
+			void GetAuto(const KeyType& name, int64& value);
+			void GetAuto(const KeyType& name, int32& value);
+			void GetAuto(const KeyType& name, int16& value);
+			void GetAuto(const KeyType& name, uint64& value);
+			void GetAuto(const KeyType& name, uint32& value);
+			void GetAuto(const KeyType& name, uint16& value);
+			void GetAuto(const KeyType& name, float& value);
+			void GetAuto(const KeyType& name, double& value);
+			void GetAuto(const KeyType& name, bool& value);
+			void GetAuto(const KeyType& name, Vector2& vec);
+			void GetAuto(const KeyType& name, Vector3& vec);
+			void GetAuto(const KeyType& name, Vector4& vec);
+			void GetAuto(const KeyType& name, Matrix& mat);
+			void GetAuto(const KeyType& name, Quaternion& quad);
+			void GetAuto(const KeyType& name, Color4& clr);
+			void GetAuto(const KeyType& name, Plane& plane);
+			void GetAuto(const KeyType& name, Apoc3D::Math::Rectangle& rect);
+			void GetAuto(const KeyType& name, Apoc3D::Math::RectangleF& rect);
+			void GetAuto(const KeyType& name, Point& pt);
+			void GetAuto(const KeyType& name, PointF& pt);
+			void GetAuto(const KeyType& name, Apoc3D::Math::Size& sz);
+			void GetAuto(const KeyType& name, BoundingBox& bb);
+			void GetAuto(const KeyType& name, BoundingSphere& bs);
+			void GetAuto(const KeyType& name, Ray& r);
+			void GetAuto(const KeyType& name, Viewport& vp);
+			void GetAuto(const KeyType& name, String& str);
 
-			void GetAuto(const KeyType& name, int64* value, int32 count)	{ GetInt64(name, value, count); }
-			void GetAuto(const KeyType& name, int32* value, int32 count)	{ GetInt32(name, value, count); }
-			void GetAuto(const KeyType& name, int16* value, int32 count)	{ GetInt16(name, value, count); }
-			void GetAuto(const KeyType& name, uint64* value, int32 count)	{ GetUInt64(name, value, count); }
-			void GetAuto(const KeyType& name, uint32* value, int32 count)	{ GetUInt32(name, value, count); }
-			void GetAuto(const KeyType& name, uint16* value, int32 count)	{ GetUInt16(name, value, count); }
-			void GetAuto(const KeyType& name, float* value, int32 count)	{ GetSingle(name, value, count); }
-			void GetAuto(const KeyType& name, double* value, int32 count)	{ GetDouble(name, value, count); }
-			void GetAuto(const KeyType& name, bool* value, int32 count)		{ GetBool(name, value, count); }
-			void GetAuto(const KeyType& name, Vector2* vec, int32 count)	{ GetVector2(name, vec, count); }
-			void GetAuto(const KeyType& name, Vector3* vec, int32 count)	{ GetVector3(name, vec, count); }
-			void GetAuto(const KeyType& name, Vector4* vec, int32 count)	{ GetVector4(name, vec, count); }
-			void GetAuto(const KeyType& name, Matrix* mat, int32 count)		{ GetMatrix(name, mat, count); }
-			void GetAuto(const KeyType& name, Quaternion* quad, int32 count)	{ GetQuaternion(name, quad, count); }
-			void GetAuto(const KeyType& name, Color4* clr, int32 count)			{ GetColor4(name, clr, count); }
-			void GetAuto(const KeyType& name, Plane* plane, int32 count)		{ GetPlane(name, plane, count); }
-			void GetAuto(const KeyType& name, Apoc3D::Math::Rectangle* rect, int32 count)	{ GetRectangle(name, rect, count); }
-			void GetAuto(const KeyType& name, RectangleF* rect, int32 count)	{ GetRectangleF(name, rect, count); }
-			void GetAuto(const KeyType& name, Point* pt, int32 count)				{ GetPoint(name, pt, count); }
-			void GetAuto(const KeyType& name, PointF* pt, int32 count)				{ GetPointF(name, pt, count); }
-			void GetAuto(const KeyType& name, Apoc3D::Math::Size* sz, int32 count)	{ GetMathSize(name, sz, count); }
-			void GetAuto(const KeyType& name, BoundingBox* bb, int32 count)			{ GetBoundingBox(name, bb, count); }
-			void GetAuto(const KeyType& name, BoundingSphere* bs, int32 count)		{ GetBoundingSphere(name, bs, count); }
-			void GetAuto(const KeyType& name, Ray* r, int32 count)					{ GetRay(name, r, count); }
-			void GetAuto(const KeyType& name, Viewport* vp, int32 count)			{ GetViewport(name, vp, count); }
-			void GetAuto(const KeyType& name, String* str, int32 count)				{ GetString(name, str, count); }
+			void GetAuto(const KeyType& name, int64* value, int32 count);
+			void GetAuto(const KeyType& name, int32* value, int32 count);
+			void GetAuto(const KeyType& name, int16* value, int32 count);
+			void GetAuto(const KeyType& name, uint64* value, int32 count);
+			void GetAuto(const KeyType& name, uint32* value, int32 count);
+			void GetAuto(const KeyType& name, uint16* value, int32 count);
+			void GetAuto(const KeyType& name, float* value, int32 count);
+			void GetAuto(const KeyType& name, double* value, int32 count);
+			void GetAuto(const KeyType& name, bool* value, int32 count);
+			void GetAuto(const KeyType& name, Vector2* vec, int32 count);
+			void GetAuto(const KeyType& name, Vector3* vec, int32 count);
+			void GetAuto(const KeyType& name, Vector4* vec, int32 count);
+			void GetAuto(const KeyType& name, Matrix* mat, int32 count);
+			void GetAuto(const KeyType& name, Quaternion* quad, int32 count);
+			void GetAuto(const KeyType& name, Color4* clr, int32 count);
+			void GetAuto(const KeyType& name, Plane* plane, int32 count);
+			void GetAuto(const KeyType& name, Apoc3D::Math::Rectangle* rect, int32 count);
+			void GetAuto(const KeyType& name, RectangleF* rect, int32 count);
+			void GetAuto(const KeyType& name, Point* pt, int32 count);
+			void GetAuto(const KeyType& name, PointF* pt, int32 count);
+			void GetAuto(const KeyType& name, Apoc3D::Math::Size* sz, int32 count);
+			void GetAuto(const KeyType& name, BoundingBox* bb, int32 count);
+			void GetAuto(const KeyType& name, BoundingSphere* bs, int32 count);
+			void GetAuto(const KeyType& name, Ray* r, int32 count);
+			void GetAuto(const KeyType& name, Viewport* vp, int32 count);
+			void GetAuto(const KeyType& name, String* str, int32 count);
 
-			bool TryGetAuto(const KeyType& name, int64& value)	{ return TryGetInt64(name, value); }
-			bool TryGetAuto(const KeyType& name, int32& value)	{ return TryGetInt32(name, value); }
-			bool TryGetAuto(const KeyType& name, int16& value)	{ return TryGetInt16(name, value); }
-			bool TryGetAuto(const KeyType& name, uint64& value)	{ return TryGetUInt64(name, value); }
-			bool TryGetAuto(const KeyType& name, uint32& value)	{ return TryGetUInt32(name, value); }
-			bool TryGetAuto(const KeyType& name, uint16& value)	{ return TryGetUInt16(name, value); }
-			bool TryGetAuto(const KeyType& name, float& value)	{ return TryGetSingle(name, value); }
-			bool TryGetAuto(const KeyType& name, double& value)	{ return TryGetDouble(name, value); }
-			bool TryGetAuto(const KeyType& name, bool& value)	{ return TryGetBool(name, value); }
-			bool TryGetAuto(const KeyType& name, Vector2& vec)	{ return TryGetVector2(name, vec); }
-			bool TryGetAuto(const KeyType& name, Vector3& vec)	{ return TryGetVector3(name, vec); }
-			bool TryGetAuto(const KeyType& name, Vector4& vec)	{ return TryGetVector4(name, vec); }
-			bool TryGetAuto(const KeyType& name, Matrix& mat)	{ return TryGetMatrix(name, mat); }
-			bool TryGetAuto(const KeyType& name, Quaternion& quad)	{ return TryGetQuaternion(name, quad); }
-			bool TryGetAuto(const KeyType& name, Color4& clr)		{ return TryGetColor4(name, clr); }
-			bool TryGetAuto(const KeyType& name, Plane& plane)		{ return TryGetPlane(name, plane); }
-			bool TryGetAuto(const KeyType& name, Apoc3D::Math::Rectangle& rect)		{ return TryGetRectangle(name, rect); }
-			bool TryGetAuto(const KeyType& name, RectangleF& rect)	{ return TryGetRectangleF(name, rect); }
-			bool TryGetAuto(const KeyType& name, Point& pt)					{ return TryGetPoint(name, pt); }
-			bool TryGetAuto(const KeyType& name, PointF& pt)				{ return TryGetPointF(name, pt); }
-			bool TryGetAuto(const KeyType& name, Apoc3D::Math::Size& sz)	{ return TryGetSize(name, sz); }
-			bool TryGetAuto(const KeyType& name, BoundingBox& bb)			{ return TryGetBoundingBox(name, bb); }
-			bool TryGetAuto(const KeyType& name, BoundingSphere& bs)		{ return TryGetBoundingSphere(name, bs); }
-			bool TryGetAuto(const KeyType& name, Ray& r)					{ return TryGetRay(name, r); }
-			bool TryGetAuto(const KeyType& name, Viewport& vp)				{ return TryGetViewport(name, vp); }
-			bool TryGetAuto(const KeyType& name, String& str)				{ return TryGetString(name, str); }
+			bool TryGetAuto(const KeyType& name, int64& value);
+			bool TryGetAuto(const KeyType& name, int32& value);
+			bool TryGetAuto(const KeyType& name, int16& value);
+			bool TryGetAuto(const KeyType& name, uint64& value);
+			bool TryGetAuto(const KeyType& name, uint32& value);
+			bool TryGetAuto(const KeyType& name, uint16& value);
+			bool TryGetAuto(const KeyType& name, float& value);
+			bool TryGetAuto(const KeyType& name, double& value);
+			bool TryGetAuto(const KeyType& name, bool& value);
+			bool TryGetAuto(const KeyType& name, Vector2& vec);
+			bool TryGetAuto(const KeyType& name, Vector3& vec);
+			bool TryGetAuto(const KeyType& name, Vector4& vec);
+			bool TryGetAuto(const KeyType& name, Matrix& mat);
+			bool TryGetAuto(const KeyType& name, Quaternion& quad);
+			bool TryGetAuto(const KeyType& name, Color4& clr);
+			bool TryGetAuto(const KeyType& name, Plane& plane);
+			bool TryGetAuto(const KeyType& name, Apoc3D::Math::Rectangle& rect);
+			bool TryGetAuto(const KeyType& name, RectangleF& rect);
+			bool TryGetAuto(const KeyType& name, Point& pt);
+			bool TryGetAuto(const KeyType& name, PointF& pt);
+			bool TryGetAuto(const KeyType& name, Apoc3D::Math::Size& sz);
+			bool TryGetAuto(const KeyType& name, BoundingBox& bb);
+			bool TryGetAuto(const KeyType& name, BoundingSphere& bs);
+			bool TryGetAuto(const KeyType& name, Ray& r);
+			bool TryGetAuto(const KeyType& name, Viewport& vp);
+			bool TryGetAuto(const KeyType& name, String& str);
 
-			bool TryGetAuto(const KeyType& name, int64* value, int32 count)		{ GetInt64(name, value, count); }
-			bool TryGetAuto(const KeyType& name, int32* value, int32 count)		{ GetInt32(name, value, count); }
-			bool TryGetAuto(const KeyType& name, int16* value, int32 count)		{ GetInt16(name, value, count); }
-			bool TryGetAuto(const KeyType& name, uint64* value, int32 count)	{ GetUInt64(name, value, count); }
-			bool TryGetAuto(const KeyType& name, uint32* value, int32 count)	{ GetUInt32(name, value, count); }
-			bool TryGetAuto(const KeyType& name, uint16* value, int32 count)	{ GetUInt16(name, value, count); }
-			bool TryGetAuto(const KeyType& name, float* value, int32 count)		{ GetSingle(name, value, count); }
-			bool TryGetAuto(const KeyType& name, double* value, int32 count)	{ GetDouble(name, value, count); }
-			bool TryGetAuto(const KeyType& name, bool* value, int32 count)		{ GetBool(name, value, count); }
-			bool TryGetAuto(const KeyType& name, Vector2* vec, int32 count)		{ GetVector2(name, vec, count); }
-			bool TryGetAuto(const KeyType& name, Vector3* vec, int32 count)		{ GetVector3(name, vec, count); }
-			bool TryGetAuto(const KeyType& name, Vector4* vec, int32 count)		{ GetVector4(name, vec, count); }
-			bool TryGetAuto(const KeyType& name, Matrix* mat, int32 count)		{ GetMatrix(name, mat, count); }
-			bool TryGetAuto(const KeyType& name, Quaternion* quad, int32 count)	{ GetQuaternion(name, quad, count); }
-			bool TryGetAuto(const KeyType& name, Color4* clr, int32 count)		{ GetColor4(name, clr, count); }
-			bool TryGetAuto(const KeyType& name, Plane* plane, int32 count)		{ GetPlane(name, plane, count); }
-			bool TryGetAuto(const KeyType& name, Apoc3D::Math::Rectangle* rect, int32 count)	{ GetRectangle(name, rect, count); }
-			bool TryGetAuto(const KeyType& name, RectangleF* rect, int32 count)	{ GetRectangleF(name, rect, count); }
-			bool TryGetAuto(const KeyType& name, Point* pt, int32 count)				{ GetPoint(name, pt, count); }
-			bool TryGetAuto(const KeyType& name, PointF* pt, int32 count)				{ GetPointF(name, pt, count); }
-			bool TryGetAuto(const KeyType& name, Apoc3D::Math::Size* sz, int32 count)	{ GetMathSize(name, sz, count); }
-			bool TryGetAuto(const KeyType& name, BoundingBox* bb, int32 count)			{ GetBoundingBox(name, bb, count); }
-			bool TryGetAuto(const KeyType& name, BoundingSphere* bs, int32 count)		{ GetBoundingSphere(name, bs, count); }
-			bool TryGetAuto(const KeyType& name, Ray* r, int32 count)					{ GetRay(name, r, count); }
-			bool TryGetAuto(const KeyType& name, Viewport* vp, int32 count)				{ GetViewport(name, vp, count); }
-			bool TryGetAuto(const KeyType& name, String* str, int32 count)				{ GetString(name, str, count); }
+			bool TryGetAuto(const KeyType& name, int64* value, int32 count);
+			bool TryGetAuto(const KeyType& name, int32* value, int32 count);
+			bool TryGetAuto(const KeyType& name, int16* value, int32 count);
+			bool TryGetAuto(const KeyType& name, uint64* value, int32 count);
+			bool TryGetAuto(const KeyType& name, uint32* value, int32 count);
+			bool TryGetAuto(const KeyType& name, uint16* value, int32 count);
+			bool TryGetAuto(const KeyType& name, float* value, int32 count);
+			bool TryGetAuto(const KeyType& name, double* value, int32 count);
+			bool TryGetAuto(const KeyType& name, bool* value, int32 count);
+			bool TryGetAuto(const KeyType& name, Vector2* vec, int32 count);
+			bool TryGetAuto(const KeyType& name, Vector3* vec, int32 count);
+			bool TryGetAuto(const KeyType& name, Vector4* vec, int32 count);
+			bool TryGetAuto(const KeyType& name, Matrix* mat, int32 count);
+			bool TryGetAuto(const KeyType& name, Quaternion* quad, int32 count);
+			bool TryGetAuto(const KeyType& name, Color4* clr, int32 count);
+			bool TryGetAuto(const KeyType& name, Plane* plane, int32 count);
+			bool TryGetAuto(const KeyType& name, Apoc3D::Math::Rectangle* rect, int32 count);
+			bool TryGetAuto(const KeyType& name, RectangleF* rect, int32 count);
+			bool TryGetAuto(const KeyType& name, Point* pt, int32 count);
+			bool TryGetAuto(const KeyType& name, PointF* pt, int32 count);
+			bool TryGetAuto(const KeyType& name, Apoc3D::Math::Size* sz, int32 count);
+			bool TryGetAuto(const KeyType& name, BoundingBox* bb, int32 count);
+			bool TryGetAuto(const KeyType& name, BoundingSphere* bs, int32 count);
+			bool TryGetAuto(const KeyType& name, Ray* r, int32 count);
+			bool TryGetAuto(const KeyType& name, Viewport* vp, int32 count);
+			bool TryGetAuto(const KeyType& name, String* str, int32 count);
 
 
 			int64 GetInt64(const KeyType& name);
@@ -435,59 +435,59 @@ namespace Apoc3D
 
 			void AddEntryDataSection(const KeyType& name, FunctorReference<void(TaggedDataWriter*)> func);
 
-			void AddAuto(const KeyType& name, int64 value)	{ AddInt64(name, value); }
-			void AddAuto(const KeyType& name, int32 value)	{ AddInt32(name, value); }
-			void AddAuto(const KeyType& name, int16 value)	{ AddInt16(name, value); }
-			void AddAuto(const KeyType& name, uint64 value)	{ AddUInt64(name, value); }
-			void AddAuto(const KeyType& name, uint32 value)	{ AddUInt32(name, value); }
-			void AddAuto(const KeyType& name, uint16 value)	{ AddUInt16(name, value); }
-			void AddAuto(const KeyType& name, float value)	{ AddSingle(name, value); }
-			void AddAuto(const KeyType& name, double value)	{ AddDouble(name, value); }
-			void AddAuto(const KeyType& name, bool value)	{ AddBool(name, value); }
-			void AddAuto(const KeyType& name, const Vector2& vec)	{ AddVector2(name, vec); }
-			void AddAuto(const KeyType& name, const Vector3& vec)	{ AddVector3(name, vec); }
-			void AddAuto(const KeyType& name, const Vector4& vec)	{ AddVector4(name, vec); }
-			void AddAuto(const KeyType& name, const Matrix& mat)	{ AddMatrix(name, mat); }
-			void AddAuto(const KeyType& name, const Color4& clr)	{ AddColor4(name, clr); }
-			void AddAuto(const KeyType& name, const Plane& plane)	{ AddPlane(name, plane); }
-			void AddAuto(const KeyType& name, const Quaternion& quad)	{ AddQuaternion(name, quad); }
-			void AddAuto(const KeyType& name, const String& str)		{ AddString(name, str); }
-			void AddAuto(const KeyType& name, const Apoc3D::Math::Rectangle& rect)  { AddRectangle(name, rect); }
-			void AddAuto(const KeyType& name, const RectangleF& rect) { AddRectangleF(name, rect); }
-			void AddAuto(const KeyType& name, const Point& pt)		{ AddPoint(name, pt); }
-			void AddAuto(const KeyType& name, const PointF& pt)		{ AddPointF(name, pt); }
-			void AddAuto(const KeyType& name, const Apoc3D::Math::Size& sz)	{ AddMathSize(name, sz); }
-			void AddAuto(const KeyType& name, const BoundingBox& bb)		{ AddBoundingBox(name, bb); }
-			void AddAuto(const KeyType& name, const BoundingSphere& bs)		{ AddBoundingSphere(name, bs); }
-			void AddAuto(const KeyType& name, const Ray& r)			{ AddRay(name, r); }
-			void AddAuto(const KeyType& name, const Viewport& vp)	{ AddViewport(name, vp); }
+			void AddAuto(const KeyType& name, int64 value);
+			void AddAuto(const KeyType& name, int32 value);
+			void AddAuto(const KeyType& name, int16 value);
+			void AddAuto(const KeyType& name, uint64 value);
+			void AddAuto(const KeyType& name, uint32 value);
+			void AddAuto(const KeyType& name, uint16 value);
+			void AddAuto(const KeyType& name, float value);
+			void AddAuto(const KeyType& name, double value);
+			void AddAuto(const KeyType& name, bool value);
+			void AddAuto(const KeyType& name, const Vector2& vec);
+			void AddAuto(const KeyType& name, const Vector3& vec);
+			void AddAuto(const KeyType& name, const Vector4& vec);
+			void AddAuto(const KeyType& name, const Matrix& mat);
+			void AddAuto(const KeyType& name, const Color4& clr);
+			void AddAuto(const KeyType& name, const Plane& plane);
+			void AddAuto(const KeyType& name, const Quaternion& quad);
+			void AddAuto(const KeyType& name, const String& str);
+			void AddAuto(const KeyType& name, const Apoc3D::Math::Rectangle& rect);
+			void AddAuto(const KeyType& name, const RectangleF& rect);
+			void AddAuto(const KeyType& name, const Point& pt);
+			void AddAuto(const KeyType& name, const PointF& pt);
+			void AddAuto(const KeyType& name, const Apoc3D::Math::Size& sz);
+			void AddAuto(const KeyType& name, const BoundingBox& bb);
+			void AddAuto(const KeyType& name, const BoundingSphere& bs);
+			void AddAuto(const KeyType& name, const Ray& r);
+			void AddAuto(const KeyType& name, const Viewport& vp);
 
-			void AddAuto(const KeyType& name, const int64* value, int32 count)	{ AddInt64(name, value, count); }
-			void AddAuto(const KeyType& name, const int32* value, int32 count)	{ AddInt32(name, value, count); }
-			void AddAuto(const KeyType& name, const int16* value, int32 count)	{ AddInt16(name, value, count); }
-			void AddAuto(const KeyType& name, const uint64* value, int32 count)	{ AddUInt64(name, value, count); }
-			void AddAuto(const KeyType& name, const uint32* value, int32 count)	{ AddUInt32(name, value, count); }
-			void AddAuto(const KeyType& name, const uint16* value, int32 count)	{ AddUInt16(name, value, count); }
-			void AddAuto(const KeyType& name, const float* value, int32 count)	{ AddSingle(name, value, count); }
-			void AddAuto(const KeyType& name, const double* value, int32 count)	{ AddDouble(name, value, count); }
-			void AddAuto(const KeyType& name, const bool* value, int32 count)	{ AddBool(name, value, count); }
-			void AddAuto(const KeyType& name, const Vector2* vec, int32 count)	{ AddVector2(name, vec, count); }
-			void AddAuto(const KeyType& name, const Vector3* vec, int32 count)	{ AddVector3(name, vec, count); }
-			void AddAuto(const KeyType& name, const Vector4* vec, int32 count)	{ AddVector4(name, vec, count); }
-			void AddAuto(const KeyType& name, const Matrix* mat, int32 count)	{ AddMatrix(name, mat, count); }
-			void AddAuto(const KeyType& name, const Color4* clr, int32 count)	{ AddColor4(name, clr, count); }
-			void AddAuto(const KeyType& name, const Plane* plane, int32 count)	{ AddPlane(name, plane, count); }
-			void AddAuto(const KeyType& name, const Quaternion* quad, int32 count)	{ AddQuaternion(name, quad, count); }
-			void AddAuto(const KeyType& name, const String* str, int32 count)		{ AddString(name, str, count); }
-			void AddAuto(const KeyType& name, const Apoc3D::Math::Rectangle* rect, int32 count)  { AddRectangle(name, rect, count); }
-			void AddAuto(const KeyType& name, const RectangleF* rect, int32 count) { AddRectangleF(name, rect, count); }
-			void AddAuto(const KeyType& name, const Point* pt, int32 count)		{ AddPoint(name, pt, count); }
-			void AddAuto(const KeyType& name, const PointF* pt, int32 count)	{ AddPointF(name, pt, count); }
-			void AddAuto(const KeyType& name, const Apoc3D::Math::Size* sz, int32 count)	{ AddMathSize(name, sz, count); }
-			void AddAuto(const KeyType& name, const BoundingBox* bb, int32 count)			{ AddBoundingBox(name, bb, count); }
-			void AddAuto(const KeyType& name, const BoundingSphere* bs, int32 count)		{ AddBoundingSphere(name, bs, count); }
-			void AddAuto(const KeyType& name, const Ray* r, int32 count)		{ AddRay(name, r, count); }
-			void AddAuto(const KeyType& name, const Viewport* vp, int32 count)	{ AddViewport(name, vp, count); }
+			void AddAuto(const KeyType& name, const int64* value, int32 count);
+			void AddAuto(const KeyType& name, const int32* value, int32 count);
+			void AddAuto(const KeyType& name, const int16* value, int32 count);
+			void AddAuto(const KeyType& name, const uint64* value, int32 count);
+			void AddAuto(const KeyType& name, const uint32* value, int32 count);
+			void AddAuto(const KeyType& name, const uint16* value, int32 count);
+			void AddAuto(const KeyType& name, const float* value, int32 count);
+			void AddAuto(const KeyType& name, const double* value, int32 count);
+			void AddAuto(const KeyType& name, const bool* value, int32 count);
+			void AddAuto(const KeyType& name, const Vector2* vec, int32 count);
+			void AddAuto(const KeyType& name, const Vector3* vec, int32 count);
+			void AddAuto(const KeyType& name, const Vector4* vec, int32 count);
+			void AddAuto(const KeyType& name, const Matrix* mat, int32 count);
+			void AddAuto(const KeyType& name, const Color4* clr, int32 count);
+			void AddAuto(const KeyType& name, const Plane* plane, int32 count);
+			void AddAuto(const KeyType& name, const Quaternion* quad, int32 count);
+			void AddAuto(const KeyType& name, const String* str, int32 count);
+			void AddAuto(const KeyType& name, const Apoc3D::Math::Rectangle* rect, int32 count);
+			void AddAuto(const KeyType& name, const RectangleF* rect, int32 count);
+			void AddAuto(const KeyType& name, const Point* pt, int32 count);
+			void AddAuto(const KeyType& name, const PointF* pt, int32 count);
+			void AddAuto(const KeyType& name, const Apoc3D::Math::Size* sz, int32 count);
+			void AddAuto(const KeyType& name, const BoundingBox* bb, int32 count);
+			void AddAuto(const KeyType& name, const BoundingSphere* bs, int32 count);
+			void AddAuto(const KeyType& name, const Ray* r, int32 count);
+			void AddAuto(const KeyType& name, const Viewport* vp, int32 count);
 			
 
 			void AddInt64(const KeyType& name, int64 value);

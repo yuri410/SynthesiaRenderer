@@ -238,7 +238,7 @@ namespace Apoc3D
 			bool m_isSet = false;
 		};
 
-		struct ButtonVisualSettings
+		struct APAPI ButtonVisualSettings
 		{
 			typedef Apoc3D::Math::Rectangle ARect;
 
@@ -496,10 +496,10 @@ namespace Apoc3D
 
 			inline bool isControlCode(int32 code) { return code >= 0xF8C0 && code < 0xF8F0; }
 
-			String MakeColorControl(uint32 argb);
-			String MakeMoveControl(const Point& position, bool passConditionCheck = false, bool relative = false);
+			APAPI String MakeColorControl(uint32 argb);
+			APAPI String MakeMoveControl(const Point& position, bool passConditionCheck = false, bool relative = false);
 
-			String MakeHyperLink(const String& linkText, uint16 linkID);
+			APAPI String MakeHyperLink(const String& linkText, uint16 linkID);
 		}
 	}
 }

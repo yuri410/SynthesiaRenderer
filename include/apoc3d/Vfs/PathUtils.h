@@ -39,8 +39,8 @@ namespace Apoc3D
 		 */
 		namespace PathUtils
 		{
-			extern const wchar_t AltDirectorySeparator;
-			extern const wchar_t DirectorySeparator;
+			APAPI extern const wchar_t AltDirectorySeparator;
+			APAPI extern const wchar_t DirectorySeparator;
 
 			/** Returns the parent directory path for the specified path string. */
 			APAPI String GetDirectory(const String& fileName);

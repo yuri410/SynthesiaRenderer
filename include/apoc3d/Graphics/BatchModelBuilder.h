@@ -53,22 +53,15 @@ namespace Apoc3D
 		{
 		public:
 			/** Add an instance of a given source, with a given transform matrix. */
-			void AddEntry(int source, const Matrix& transform)
-			{
-				Entry ent = { source, transform };
-				m_entires.Add(ent);
-			}
+			void AddEntry(int source, const Matrix& transform);
 
 			/** Add the sources of models represented by FileLocation */
-			void AddSource(const FileLocation& fl)
-			{
-				m_modelTable.Add(fl);
-			}
+			void AddSource(const FileLocation& fl);
 
 			/** Build the model data, when finished adding sources and entries. */
 			ModelData* BuildData();
 
-			BatchModelBuilder(){}
+			BatchModelBuilder();
 			~BatchModelBuilder();
 		private:
 			struct Entry

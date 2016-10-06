@@ -43,21 +43,8 @@ namespace Apoc3D
 			const Matrix* Transfroms = nullptr;
 			int32 Count = 0;
 			
-			bool operator ==(const PartTransforms& another) const
-			{
-				if (Count == another.Count)
-				{
-					if (Transfroms == another.Transfroms)
-						return true;
-
-					if (Transfroms && another.Transfroms)
-						return memcmp(Transfroms, another.Transfroms, sizeof(Matrix) * Count) != 0;
-					return false;
-				}
-				return false;
-			}
-
-			bool operator !=(const PartTransforms& other) const { return !this->operator==(other); }
+			bool operator ==(const PartTransforms& another) const;
+			bool operator !=(const PartTransforms& other) const;
 		};
 
 		/**
@@ -81,16 +68,8 @@ namespace Apoc3D
 			/** Let the renderer use RootTransform as the final transformation, not multiplying obj's transform */
 			bool RootTransformIsFinal = false;
 
-			bool operator ==(const RenderOperation& other)
-			{
-				return GeometryData == other.GeometryData && 
-					Material == other.Material && 
-					RootTransform == other.RootTransform &&
-					PartTransform == other.PartTransform &&
-					RootTransformIsFinal == other.RootTransformIsFinal &&
-					UserData == other.UserData;
-			}
-			bool operator !=(const RenderOperation& other) { return !this->operator==(other); }
+			bool operator ==(const RenderOperation& other);
+			bool operator !=(const RenderOperation& other);
 		};
 	};
 };

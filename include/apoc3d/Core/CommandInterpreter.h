@@ -40,7 +40,7 @@ namespace Apoc3D
 		typedef const Apoc3D::Collections::List<String>& CommandArgsConstRef;
 		typedef fastdelegate::FastDelegate<void(CommandArgsConstRef)> CommandHandler;
 
-		struct CommandDescription
+		struct APAPI CommandDescription
 		{
 			String Name;
 			String Description;
@@ -52,31 +52,12 @@ namespace Apoc3D
 
 			Apoc3D::Collections::LinkedList<CommandDescription> SubCommands;
 
-			CommandDescription() { }
-
-			CommandDescription(const String& command, int paramCount, const CommandHandler& handler, const String& name, const String& description)
-				: Name(name), Description(description), CommandName(command), NumOfParameters(paramCount), Handler(handler)
-			{ }
-
-			CommandDescription(const String& command, int paramCount, const CommandHandler& handler, const String& name, const String& description, 
-				std::initializer_list<CommandDescription> subCmds)
-				: CommandDescription(command, paramCount, handler, name, description)
-			{
-				for (const CommandDescription& cd : subCmds)
-				{
-					SubCommands.PushBack(cd);
-				}
-			}
-
-			CommandDescription(const String& command, int paramCount, const CommandHandler& handler, const String& name)
-				: CommandDescription(command, paramCount, handler, name, L"") { }
-
-			CommandDescription(const String& command, int paramCount, const CommandHandler& handler, const String& name, std::initializer_list<CommandDescription> subCmds)
-				: CommandDescription(command, paramCount, handler, name, L"", subCmds) { }
-
-			CommandDescription(const String& command, int paramCount, const CommandHandler& handler)
-				: CommandDescription(command, paramCount, handler, command, L"") { }
-
+			CommandDescription();
+			CommandDescription(const String& command, int paramCount, const CommandHandler& handler, const String& name, const String& description);
+			CommandDescription(const String& command, int paramCount, const CommandHandler& handler, const String& name, const String& description, std::initializer_list<CommandDescription> subCmds);
+			CommandDescription(const String& command, int paramCount, const CommandHandler& handler, const String& name);
+			CommandDescription(const String& command, int paramCount, const CommandHandler& handler, const String& name, std::initializer_list<CommandDescription> subCmds);
+			CommandDescription(const String& command, int paramCount, const CommandHandler& handler);
 		};
 
 		typedef EventDelegate<String, Apoc3D::Collections::List<String>*> RawCommandHandler;

@@ -84,36 +84,15 @@ namespace Apoc3D
 			Color4 Specular;	/** the specular component of this material */
 			float Power;		/** the specular shininess */
 
-			
-			void AddCustomParameter(const MaterialCustomParameter& value);
 
-			void SetDefaults()
-			{
-				DepthTestEnabled = DepthWriteEnabled = true;
-				Cull = CULL_CounterClockwise;
-				IsBlendTransparent = false;
-				BlendFunction = BlendFunction::Add;
-				SourceBlend = Blend::One;
-				DestinationBlend = Blend::Zero;
-				Priority = DefaultMaterialPriority;
-				PassFlags = 1;
-				UsePointSprite = false;
-
-				AlphaReference = 0;
-				AlphaTestEnabled = false;
-
-				Ambient = Color4(0,0,0,0);
-				Diffuse = Color4(1.f,1.f,1.f,1.f);
-				Emissive = Color4(0,0,0,0);
-				Specular = Color4(0,0,0,0);
-				Power = 0;
-			}
-
-			MaterialData() { }
-			~MaterialData() { }
+			MaterialData();
+			~MaterialData();
 
 			MaterialData(const MaterialData& other) = default;
 
+			void AddCustomParameter(const MaterialCustomParameter& value);
+
+			void SetDefaults();
 
 			void LoadData(TaggedDataReader *data);
 			TaggedDataWriter* SaveData();
@@ -125,7 +104,6 @@ namespace Apoc3D
 			void Parse(const ConfigurationSection* sect, const String& baseName = L"", FunctorReference<Color4(const String&)> colorParser = nullptr);
 
 		private:
-			
 
 			/** Load with format version 3 */
 			void LoadV3(TaggedDataReader* data);

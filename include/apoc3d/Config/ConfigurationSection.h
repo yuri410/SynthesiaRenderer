@@ -246,11 +246,11 @@ namespace Apoc3D
 			void SetUInts(const uint32* v, int count);
 			void SetVector3s(const Vector3* v, int count);
 
-			void SetStrings(const List<String>& v)		{ SetStrings(&v[0], v.getCount()); }
-			void SetSingles(const List<float>& v)		{ SetSingles(&v[0],  v.getCount()); }
-			void SetPercentages(const List<float>& v)	{ SetPercentages(&v[0],  v.getCount()); }
-			void SetInts(const List<int32>& v)			{ SetInts(&v[0],  v.getCount()); }
-			void SetUInts(const List<uint32>& v)		{ SetUInts(&v[0],  v.getCount()); }
+			void SetStrings(const List<String>& v);
+			void SetSingles(const List<float>& v);
+			void SetPercentages(const List<float>& v);
+			void SetInts(const List<int32>& v);
+			void SetUInts(const List<uint32>& v);
 
 
 			void SetBool(const String& name, bool value);

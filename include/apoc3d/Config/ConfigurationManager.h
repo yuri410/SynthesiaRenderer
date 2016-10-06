@@ -55,12 +55,7 @@ namespace Apoc3D
 			void LoadConfig(const String& name, const ResourceLocation& rl, ConfigurationFormat* fmt = nullptr);
 
 			/**  Gets a pre-loaded configuration with the given name */
-			Configuration* getConfiguration(const String& name) const
-			{
-				Configuration* result = nullptr;
-				m_configs.TryGetValue(name, result);
-				return result;
-			}
+			Configuration* getConfiguration(const String& name) const;
 
 			Configuration* CreateInstance(const ResourceLocation& rl, ConfigurationFormat* fmt = nullptr);
 

@@ -127,6 +127,10 @@ namespace Apoc3D
 			StringTable() { }
 			~StringTable() { }
 
+			StringTable(const StringTable&) = delete;
+			StringTable& operator=(const StringTable&) = delete;
+
+
 			String GetString(const std::string& name) const;
 
 			template <typename ... Args>

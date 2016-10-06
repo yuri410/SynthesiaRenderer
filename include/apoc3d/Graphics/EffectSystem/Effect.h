@@ -98,7 +98,6 @@ namespace Apoc3D
 
 				static Shader* LoadVertexShader(RenderDevice* rs, const ResourceLocation& vs);
 				static Shader* LoadPixelShader(RenderDevice* rs, const ResourceLocation& ps);
-				static void LoadEffect(RenderDevice* rs, const ResourceLocation& rl, Shader*& vs, Shader*& ps);
 
 				String m_name;
 				bool m_isUnsupported = false;
@@ -138,7 +137,11 @@ namespace Apoc3D
 				int FindParameterIndex(const String& name);
 
 				template<typename T>
-				void SetParameterValue(int index, const T* value, int count);
+				void SetParameterValue(int index, const T* value, int count)
+				{
+					ResolvedEffectParameter& param = m_parameters[index];
+					param.RS_TargetShader->SetValue(param.RegisterIndex, value, count);
+				}
 
 
 				void SetParameterValue(int index, const Vector2* value, int count);
@@ -245,7 +248,6 @@ namespace Apoc3D
 
 				// for duplicated material parameter setup check only
 				void* m_previousMaterialPointer = nullptr;
-				//Matrix m_mtrxBuffer[InstancingData::MaxOneTimeInstances];
 			};
 
 			template<typename T>

@@ -34,8 +34,8 @@ namespace Apoc3D
 {
 	namespace Math
 	{
-		uint16 R32ToR16I(uint32 value);
-		uint32 R16ToR32I(uint16 value);
+		APAPI uint16 R32ToR16I(uint32 value);
+		APAPI uint32 R16ToR32I(uint16 value);
 
 		inline uint16 R32ToR16(float value) { return R32ToR16I(reinterpret_cast<const uint32&>(value)); }
 

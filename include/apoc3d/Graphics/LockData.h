@@ -43,32 +43,21 @@ namespace Apoc3D
 			public:
 				static const DataRectangle Empty;
 
-				DataRectangle(int pitch, void* pointer, int width, int height, PixelFormat fmt)
-					: m_pitch(pitch), m_pointer(pointer), m_width(width), m_height(height), m_format(fmt)
-				{ }
+				DataRectangle(int pitch, void* pointer, int width, int height, PixelFormat fmt);
 
 				PixelFormat getFormat() const { return m_format; }
 				int32 getPitch() const { return m_pitch; }
 				int32 getWidth() const { return m_width; }
 				int32 getHeight() const { return m_height; }
-				int32 getMemorySize() const
-				{
-					return PixelFormatUtils::GetMemorySize(m_width, m_height, 1, m_format);
-				}
-				bool isCompressed() const
-				{
-					return PixelFormatUtils::IsCompressed(m_format);
-				}
+				int32 getMemorySize() const;
+				bool isCompressed() const;
 				void* getDataPointer() const { return m_pointer; }
 				
 				/**
 				 *  Return whether this buffer is laid out consecutive in memory (ie the pitches
 				 *  are equal to the dimensions)
 				 */
-				bool isConsecutive() const
-				{
-					return m_pitch == m_width;
-				}
+				bool isConsecutive() const;
 
 			private:
 				int32 m_pitch;
@@ -84,36 +73,25 @@ namespace Apoc3D
 			public:
 				static const DataBox Empty;
 
+				DataBox(int width, int height, int depth, int rowPitch, int slicePitch, void* pointer, PixelFormat fmt);
+
 				PixelFormat getFormat() const { return m_format; }
 				int32 getWidth() const { return m_width; }
 				int32 getHeight() const { return m_height; }
 				int32 getDepth() const { return m_depth; }
 
-				bool isCompressed() const
-				{
-					return PixelFormatUtils::IsCompressed(m_format);
-				}
+				bool isCompressed() const;
+
 				/** 
 				 *  Return whether this buffer is laid out consecutive in memory (ie the pitches
 				 *  are equal to the dimensions)
 				 */
-				bool isConsecutive() const
-				{
-					return m_rowPitch == m_width && m_slicePitch == (m_width*m_height);
-				}
+				bool isConsecutive() const;
 
 				int32 getRowPitch() const { return m_rowPitch; }
 				int32 getSlicePitch() const { return m_slicePitch; }
 				void* getDataPointer() const { return m_pointer; }
-				int32 getMemorySize() const
-				{
-					return PixelFormatUtils::GetMemorySize(m_width, m_height, m_depth, m_format);
-				}
-
-				DataBox(int width, int height, int depth, int rowPitch, int slicePitch, 
-					void* pointer, PixelFormat fmt)
-					: m_rowPitch(rowPitch), m_slicePitch(slicePitch), m_pointer(pointer), m_format(fmt),
-					m_width(width), m_height(height), m_depth(depth) { }
+				int32 getMemorySize() const;
 
 			private:
 				int32 m_rowPitch;

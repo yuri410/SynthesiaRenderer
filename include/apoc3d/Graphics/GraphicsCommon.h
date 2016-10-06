@@ -405,13 +405,13 @@ namespace Apoc3D
 				All = Pixel | Vertex | Geometry
 			};
 
-			extern const Utility::TypeDualConverter<Blend> BlendConverter;
-			extern const Utility::TypeDualConverter<BlendFunction> BlendFunctionConverter;
-			extern const Utility::TypeDualConverter<CullMode> CullModeConverter;
-			extern const Utility::TypeDualConverter<TextureAddressMode> TextureAddressModeConverter;
-			extern const Utility::TypeDualConverter<TextureFilter> TextureFilterConverter;
-			extern const Utility::TypeDualConverter<ShaderType> ShaderTypeConverter;
-			extern const Utility::TypeDualConverter<VertexElementUsage> VertexElementUsageConverter;
+			APAPI extern const Utility::TypeDualConverter<Blend> BlendConverter;
+			APAPI extern const Utility::TypeDualConverter<BlendFunction> BlendFunctionConverter;
+			APAPI extern const Utility::TypeDualConverter<CullMode> CullModeConverter;
+			APAPI extern const Utility::TypeDualConverter<TextureAddressMode> TextureAddressModeConverter;
+			APAPI extern const Utility::TypeDualConverter<TextureFilter> TextureFilterConverter;
+			APAPI extern const Utility::TypeDualConverter<ShaderType> ShaderTypeConverter;
+			APAPI extern const Utility::TypeDualConverter<VertexElementUsage> VertexElementUsageConverter;
 
 		}
 	}

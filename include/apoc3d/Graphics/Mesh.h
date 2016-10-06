@@ -74,6 +74,9 @@ namespace Apoc3D
 			Mesh(RenderDevice* device, const MeshData* data);
 			~Mesh();
 
+			Mesh(const Mesh&) = delete;
+			Mesh& operator=(const Mesh&) = delete;
+
 			/** Copies the indices to a given buffer. */
 			void GetIndices(uint* dest) const;
 
@@ -89,11 +92,7 @@ namespace Apoc3D
 
 			VertexBuffer* getVertexBuffer() const { return m_vertexBuffer; }
 			VertexDeclaration* getVertexDecl() const { return m_vtxDecl; }
-			//const List<IndexBuffer*>& getIndexBuffers() const { return m_indexBuffers; }
 
-			//const List<VertexElement>& getVertexElement() const { return m_vertexElements; }
-			//const int32* getPartPrimitiveCount() const { return m_partPrimitiveCount; }
-			//const int32* getPartVertexCount() const { return m_partVertexCount; } 
 			int32 getPartCount() const { return m_subParts.getCount(); }
 
 			int32 getPartPrimitiveCount(int32 partIdx) const { return m_subParts[partIdx].PrimitiveCount; }
@@ -101,7 +100,6 @@ namespace Apoc3D
 
 			IndexBuffer* getIndexBuffer(int32 partIdx) const { return m_subParts[partIdx].Indices; }
 			List<Material*>& getMaterialFrames(int32 partIdx) const { return m_subParts[partIdx].MaterialFrames; }
-			//int32 getMaterialFramesCount(int32 partIdx) const { return m_subParts[partIdx].MaterialFrames.getCount(); }
 			Material* getMaterial(int32 partIdx, int32 frameIdx) const { return m_subParts[partIdx].MaterialFrames[frameIdx]; }
 
 			MaterialIterator getMaterials() const { return MaterialIterator(this); }

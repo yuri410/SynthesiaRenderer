@@ -109,7 +109,7 @@ namespace Apoc3D
 			Effect* GetFirstValidEffect() const;
 
 			/** Get the effect at the given index in the mtrl's effect table. */
-			Effect* getPassEffect(int index) const { if (index==-1) return GetFirstValidEffect(); return m_effects[index]; }
+			Effect* getPassEffect(int index) const;
 			void setPassEffect(int index, Effect* eff) { m_effects[index] = eff; }
 
 			/** Gets the texture at texture layer idx */

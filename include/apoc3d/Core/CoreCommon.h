@@ -37,13 +37,11 @@ namespace Apoc3D
 			int mark;
 			String name;
 
-		public:
 			PlatformAPISupport(int mark, String name)
 			{
 				mark = mark;
 				name = name;
 			}
-
 
 			const String &getPlatformName() { return name; }
 			int getMark() { return mark; }

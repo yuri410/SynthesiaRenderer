@@ -45,11 +45,7 @@ namespace Apoc3D
 			virtual void Load(const ResourceLocation& rl, Configuration* result) override;
 			virtual void Save(Configuration* config, Stream& strm) override;
 
-			List<String> GetSupportedFileSystemExtensions() override
-			{
-				return { L"ini" };
-			}
-
+			List<String> GetSupportedFileSystemExtensions() override;
 		};
 	}
 }

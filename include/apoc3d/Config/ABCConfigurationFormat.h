@@ -48,10 +48,8 @@ namespace Apoc3D
 			virtual void Load(const ResourceLocation& rl, Configuration* result) override;
 			virtual void Save(Configuration* config, Stream& strm) override;
 
-			List<String> GetSupportedFileSystemExtensions() override
-			{
-				return { L"abc" };
-			}
+			List<String> GetSupportedFileSystemExtensions() override;
+
 		private:
 			/** 
 			 *  Saves a ConfigurationSection sub tree to a section of tagged data, recursively.

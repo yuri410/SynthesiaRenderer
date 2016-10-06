@@ -81,10 +81,7 @@ namespace Apoc3D
 			LogType Type;
 
 			LogEntry() { }
-			LogEntry(uint64 serIdx, time_t time, const String& content, LogMessageLevel level, LogType type)
-				: SerialIndex(serIdx), Time(time), Level(level), Content(content), Type(type)
-			{
-			}
+			LogEntry(uint64 serIdx, time_t time, const String& content, LogMessageLevel level, LogType type);
 
 			bool operator ==(const LogEntry& b) const;
 			bool operator !=(const LogEntry& b) const { return !(this->operator==(b)); }

@@ -57,9 +57,7 @@ namespace Apoc3D
 				: X(area.X), Y(area.Y), Width(area.Width), Height(area.Height), MinZ(0), MaxZ(1) { }
 
 			Viewport(int x, int y, int width, int height, float minZ, float maxZ)
-				: X(x), Y(y), Width(width), Height(height),
-				MinZ(minZ), MaxZ(maxZ)
-			{ }
+				: X(x), Y(y), Width(width), Height(height), MinZ(minZ), MaxZ(maxZ) { }
 
 			float getAspectRatio() const { return Width / static_cast<float>(Height); }
 
@@ -82,11 +80,8 @@ namespace Apoc3D
 			void ProjectFast(Vector2* dest, const Vector3* source, int32 count, const Matrix& wvp) const;
 			void ProjectFast(Vector3* dest, const Vector3* source, int32 count, const Matrix& wvp) const;
 
-			bool operator==(const Viewport &other) const
-			{
-				return other.X == X && other.Y == Y && other.Width == Width && other.Height == Height && other.MinZ == MinZ && other.MaxZ == MaxZ; 
-			}
-			bool operator!=(const Viewport &other) const { return !(*this == other); }
+			bool operator==(const Viewport &other) const;
+			bool operator!=(const Viewport &other) const;
 
 		};
 	}

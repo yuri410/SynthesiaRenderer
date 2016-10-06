@@ -51,13 +51,7 @@ namespace Apoc3D
 			void Add(const RenderOperation& op) { m_oplist.Add(op); }
 
 			/** Adds some new RenderOperation to the buffer */
-			void Add(const RenderOperation* op, int count)
-			{
-				for (int i=0;i<count;i++)
-				{
-					m_oplist.Add(*(op+i));
-				}
-			}
+			void Add(const RenderOperation* op, int count) { m_oplist.AddArray(op, count); }
 
 			void AddWithParamAndMtrl(const RenderOperation* op, int count, Material* mtrl, void* userPointer);
 			void AddWithParamAndMtrl(const RenderOperation* op, int count, const Matrix& transform, Material* mtrl, void* userPointer);
@@ -70,7 +64,8 @@ namespace Apoc3D
 			void AddWithParam(const RenderOperation* op, int count, void* userPointer);
 			
 
-			void AddBufferWithMtrl(const RenderOperationBuffer* ops, Material* mtrl, void* userPointer) 
+
+			void AddBufferWithMtrl(const RenderOperationBuffer* ops, Material* mtrl, void* userPointer)
 			{
 				AddWithParamAndMtrl(ops->m_oplist.getElements(), ops->getCount(), mtrl, userPointer);
 			}
@@ -85,7 +80,7 @@ namespace Apoc3D
 
 			void AddBuffer(const RenderOperationBuffer* ops)
 			{
-				Add(ops->m_oplist.getElements(), ops->getCount()); 
+				Add(ops->m_oplist.getElements(), ops->getCount());
 			}
 			void AddBuffer(const RenderOperationBuffer* ops, const Matrix& transform, bool isFinal)
 			{
@@ -93,7 +88,7 @@ namespace Apoc3D
 			}
 			void AddBuffer(const RenderOperationBuffer* ops, const Matrix& transform)
 			{
-				AddWithParam(ops->m_oplist.getElements(), ops->getCount(), transform); 
+				AddWithParam(ops->m_oplist.getElements(), ops->getCount(), transform);
 			}
 			void AddBuffer(const RenderOperationBuffer* ops, const Matrix& transform, void* userPointer)
 			{
@@ -103,10 +98,11 @@ namespace Apoc3D
 			{
 				AddWithParam(ops->m_oplist.getElements(), ops->getCount(), transform, isFinal, userPointer);
 			}
-			void AddBuffer(const RenderOperationBuffer* ops, void* userPointer) 
+			void AddBuffer(const RenderOperationBuffer* ops, void* userPointer)
 			{
 				AddWithParam(ops->m_oplist.getElements(), ops->getCount(), userPointer);
 			}
+
 
 			void SetForAllWithMtrl(Material* mtrl, void* userPointer);
 			void SetForAllWithMtrl(const Matrix& transform, Material* mtrl, void* userPointer);
@@ -122,18 +118,9 @@ namespace Apoc3D
 
 			void ReserveDiscard(int count) { m_oplist.ResizeDiscard(count); }
 
-			const RenderOperation& get(int i) const
-			{
-				assert(i>=0 && i<getCount());
-				return m_oplist[i];
-			}
-			RenderOperation& operator[](int i)
-			{
-				assert(i>=0 && i<getCount());
-				return m_oplist[i];
-			}
-			//void MultiplyTransform(const Matrix& m);
-
+			const RenderOperation& get(int i) const { return m_oplist[i]; }
+			RenderOperation& operator[](int i) { return m_oplist[i]; }
+			
 			int getCount() const { return m_oplist.getCount(); }
 
 			const RenderOperation* begin() const { return m_oplist.begin(); }
@@ -141,6 +128,7 @@ namespace Apoc3D
 
 			RenderOperation* begin() { return m_oplist.begin(); }
 			RenderOperation* end() { return m_oplist.end(); }
+
 		private:
 			List<RenderOperation> m_oplist;
 		};

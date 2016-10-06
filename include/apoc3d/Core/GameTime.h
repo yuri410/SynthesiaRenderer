@@ -33,20 +33,12 @@ namespace Apoc3D
 	namespace Core
 	{
 		/** Contains the current timing state of the game. */
-		struct GameTime
+		struct APAPI GameTime
 		{
-			GameTime() { }
-
-			GameTime(float elapsedRTime, float fps)
-				: ElapsedTime(elapsedRTime), ElapsedRealTime(elapsedRTime), FPS(fps) { }
-
-			GameTime(float elapsedTime, float elapsedRTime, float elapsedTimeSubstep, int32 iteractionCount, float fps, bool isRenderingSlow)
-				: ElapsedTime(elapsedTime), ElapsedTimeSubstep(elapsedTimeSubstep),
-				ElapsedRealTime(elapsedRTime), IterationCount(iteractionCount),
-				FPS(fps), IsRenderingSlow(isRenderingSlow) { }
-
-
-			~GameTime() { }
+			GameTime();
+			GameTime(float elapsedRTime, float fps);
+			GameTime(float elapsedTime, float elapsedRTime, float elapsedTimeSubstep, int32 iteractionCount, float fps, bool isRenderingSlow);
+			~GameTime();
 
 			float getElapsedTime() const { return ElapsedTime; }
 
@@ -78,9 +70,7 @@ namespace Apoc3D
 
 			float ElapsedTimeSubstep = 0;
 
-			/**
-			 * The number of iterations in a fixed time step system.
-			 */
+			/** The number of iterations in a fixed time step system. */
 			int32 IterationCount = 1;
 
 			float FPS = 0;

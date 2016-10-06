@@ -44,7 +44,7 @@ namespace Apoc3D
 			{
 				
 				BufferUsageFlags GetBufferUsage(DWORD usage);
-				PixelFormat ConvertBackPixelFormat(DWORD format);
+				PLUGINAPI PixelFormat ConvertBackPixelFormat(DWORD format);
 				DepthFormat ConvertBackDepthFormat(DWORD format);
 				
 
@@ -81,7 +81,7 @@ namespace Apoc3D
 
 				D3DSTENCILOP ConvertStencilOperation(StencilOperation op);
 
-				D3DFORMAT ConvertPixelFormat(PixelFormat format);
+				PLUGINAPI D3DFORMAT ConvertPixelFormat(PixelFormat format);
 				D3DFORMAT ConvertDepthFormat(DepthFormat format);
 
 				D3DTEXTUREFILTERTYPE ConvertTextureFilter(TextureFilter filter);
