@@ -26,6 +26,11 @@ namespace SR
 
 		void ShowAbout(MenuItem* ctrl);
 
+		void OpenMidi(MenuItem* c);
+		void Export(MenuItem* c);
+
+		void Exit(MenuItem* c);
+
 		void Slider_Changed(SliderBar* sb, bool finishing);
 		
 		void Label_Link(Label*, uint16);
