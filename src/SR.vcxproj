@@ -141,7 +141,14 @@
     <None Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SRCommon.cpp" />
     <ClInclude Include="App.h" />
+    <ClCompile Include="IOUtils.cpp" />
+    <ClCompile Include="Library\Binasc.cpp" />
+    <ClCompile Include="Library\MidiEvent.cpp" />
+    <ClCompile Include="Library\MidiEventList.cpp" />
+    <ClCompile Include="Library\MidiFile.cpp" />
+    <ClCompile Include="Library\MidiMessage.cpp" />
     <ClCompile Include="PCH.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">false</ExcludedFromBuild>
@@ -153,6 +160,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_DynLib|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release_DynLib|Win32'">PCH.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClInclude Include="IOUtils.h" />
+    <ClInclude Include="Library\Binasc.h" />
+    <ClInclude Include="Library\MidiEvent.h" />
+    <ClInclude Include="Library\MidiEventList.h" />
+    <ClInclude Include="Library\MidiFile.h" />
+    <ClInclude Include="Library\MidiMessage.h" />
     <ClInclude Include="SRCommon.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
