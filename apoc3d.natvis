@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+  <Type Name="Apoc3D::Math::Vector2">
+    <DisplayString>[ {X,g}, {Y,g} ]</DisplayString>
+    <Expand>
+      <Item Name="X">X,f</Item>
+      <Item Name="Y">Y,f</Item>
+    </Expand>
+  </Type>
+  
+  <Type Name="Apoc3D::Math::Vector3">
+    <DisplayString>[ {X,g}, {Y,g}, {Z,g} ]</DisplayString>
+    <Expand>
+      <Item Name="X">X,f</Item>
+      <Item Name="Y">Y,f</Item>
+      <Item Name="Z">Z,f</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Math::Vector4">
+    <DisplayString>[ {X,g}, {Y,g}, {Z,g}, {W,g} ]</DisplayString>
+    <Expand>
+      <Item Name="X">X,f</Item>
+      <Item Name="Y">Y,f</Item>
+      <Item Name="Z">Z,f</Item>
+      <Item Name="W">W,f</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Math::Color4">
+    <DisplayString>[ {Red,g}, {Green,g}, {Blue,g}, {Alpha,g} ]</DisplayString>
+    <Expand>
+      <Item Name="Red">Red,f</Item>
+      <Item Name="Green">Green,f</Item>
+      <Item Name="Blue">Blue,f</Item>
+      <Item Name="Alpha">Alpha,f</Item>
+    </Expand>
+  </Type>
+  
+  
+  <Type Name="Apoc3D::Math::Size">
+    <DisplayString>[ {Width}, {Height} ]</DisplayString>
+    <Expand>
+      <Item Name="Width">Width</Item>
+      <Item Name="Height">Height</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Math::Point">
+    <DisplayString>[ {X}, {Y} ]</DisplayString>
+    <Expand>
+      <Item Name="X">X</Item>
+      <Item Name="Y">Y</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Math::PointF">
+    <DisplayString>[ {X,g}, {Y,g} ]</DisplayString>
+    <Expand>
+      <Item Name="X">X,f</Item>
+      <Item Name="Y">Y,f</Item>
+    </Expand>
+  </Type>
+  
+  <Type Name="Apoc3D::Math::Rectangle">
+    <DisplayString>[ {X}, {Y}, {Width}, {Height} ]</DisplayString>
+    <Expand>
+      <Item Name="X">X</Item>
+      <Item Name="Y">Y</Item>
+      <Item Name="Width">Width</Item>
+      <Item Name="Height">Height</Item>
+    </Expand>
+  </Type>
+  
+  <Type Name="Apoc3D::Math::RectangleF">
+    <DisplayString>[ {X,g}, {Y,g}, {Width,g}, {Height,g} ]</DisplayString>
+    <Expand>
+      <Item Name="X">X,f</Item>
+      <Item Name="Y">Y,f</Item>
+      <Item Name="Width">Width,f</Item>
+      <Item Name="Height">Height,f</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Collections::List&lt;*&gt;">
+    <DisplayString>{{ Count={m_count} }}</DisplayString>
+    <Expand>
+      <Item Name="[Capacity]" ExcludeView="simple">m_count</Item>
+      <ArrayItems>
+        <Size>m_count</Size>
+        <ValuePointer>($T1*)m_elements</ValuePointer>
+      </ArrayItems>
+  </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Collections::FixedList&lt;*,*&gt;">
+    <DisplayString>{{ Count={m_count} }}</DisplayString>
+    <Expand>
+      <Item Name="[Capacity]" ExcludeView="simple">$T2</Item>
+      <ArrayItems>
+        <Size>m_count</Size>
+        <ValuePointer>($T1*)m_elements</ValuePointer>
+      </ArrayItems>
+  </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Collections::WrappedList&lt;*&gt;">
+    <DisplayString>{{ Count={m_count} }}</DisplayString>
+    <Expand>
+      <Item Name="[Capacity]" ExcludeView="simple">m_length</Item>
+      <ArrayItems>
+        <Size>m_count</Size>
+        <ValuePointer>($T1*)m_elements</ValuePointer>
+      </ArrayItems>
+  </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Collections::Utils::HashMapEntry&lt;*,*&gt;">
+    <DisplayString>[{*($T1*)(keyStor)}, {*($T2*)(valueStor)}]</DisplayString>
+
+    <Expand>
+      <Item Name="Key">*($T1*)(keyStor)</Item>
+      <Item Name="Value">*($T2*)(valueStor)</Item>
+    </Expand>
+  </Type>
+  
+  <Type Name="Apoc3D::Collections::Utils::HashSetEntry&lt;*&gt;">
+    <DisplayString>{*($T1*)(dataStor)}</DisplayString>
+
+    <Expand>
+    </Expand>
+  </Type>
+  
+  <Type Name="Apoc3D::Collections::HashMap&lt;*,*,*&gt;">
+    <AlternativeType Name="Apoc3D::Collections::HashSet&lt;*,*&gt;" />
+    <DisplayString>{{ Count={m_count} }}</DisplayString>
+    
+    <Expand>
+      <IndexListItems>
+        <Size>m_count</Size>
+        <ValueNode>m_entries[$i]</ValueNode>
+      </IndexListItems>
+    </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Collections::LinkedList&lt;*&gt;" >
+    <DisplayString>{{ Count={m_size} }}</DisplayString>
+
+    <Expand>
+      <Item Name="[Count]" ExcludeView="simple">m_size</Item>
+      <LinkedListItems>
+        <Size>m_size</Size>
+        <HeadPointer>m_firstNode</HeadPointer>
+        
+        <NextPointer>Next</NextPointer>
+        <ValueNode>Data</ValueNode>
+      </LinkedListItems>
+    </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Collections::LinkedList&lt;*&gt;::Iterator">
+    <DisplayString>{{ {m_referenceNode-&gt;Data} }}</DisplayString>
+  </Type>
+
+  <Type Name="Apoc3D::Collections::Stack&lt;*&gt;">
+    <DisplayString>{{ Count={m_count} }}</DisplayString>
+
+    <Expand>
+      <Item Name="[Capacity]" ExcludeView="simple">m_capacity</Item>
+      <Item Name="[Count]" ExcludeView="simple">m_count</Item>
+
+      <IndexListItems>
+        <Size>m_count</Size>
+        <ValueNode>m_array[m_count - $i - 1]</ValueNode>
+      </IndexListItems>
+    </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Collections::FixedStack&lt;*,*&gt;">
+    <DisplayString>{{ Count={m_count} }}</DisplayString>
+
+    <Expand>
+      <Item Name="[Capacity]" ExcludeView="simple">$T2</Item>
+      <Item Name="[Count]" ExcludeView="simple">m_count</Item>
+
+      <IndexListItems>
+        <Size>m_count</Size>
+        <ValueNode>(($T1*)m_storage)[m_count - $i - 1]</ValueNode>
+      </IndexListItems>
+    </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Collections::Queue&lt;*&gt;">
+    <DisplayString>{{ Count={m_count} }}</DisplayString>
+
+    <Expand>
+      <Item Name="[Capacity]" ExcludeView="simple">m_arrLength</Item>
+      <Item Name="[Count]" ExcludeView="simple">m_count</Item>
+
+      <IndexListItems>
+        <Size>m_count</Size>
+        <ValueNode>m_array[(m_head + $i) % m_arrLength]</ValueNode>
+      </IndexListItems>
+    </Expand>
+  </Type>
+
+  <Type Name="Apoc3D::Collections::FixedQueue&lt;*,*&gt;">
+    <DisplayString>{{ Count={m_count} }}</DisplayString>
+
+    <Expand>
+      <Item Name="[Capacity]" ExcludeView="simple">$T2</Item>
+      <Item Name="[Count]" ExcludeView="simple">m_count</Item>
+
+      <IndexListItems>
+        <Size>m_count</Size>
+        <ValueNode>(($T1*)m_storage)[(m_head + $i) % $T2]</ValueNode>
+      </IndexListItems>
+    </Expand>
+  </Type>
+  
+</AutoVisualizer>

@@ -1,0 +1,6 @@
+objs/
+Debug/
+Release_DynLib/
+Release_Static/
+.vs/
+*.user
