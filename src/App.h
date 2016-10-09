@@ -3,6 +3,8 @@
 
 namespace SR
 {
+	struct Song;
+
     class App : public Apoc3DEx::Game
 	{
 	public:
@@ -55,6 +57,8 @@ namespace SR
 		float m_timer = 0;
 
 		Sprite* m_sprite;
+		Song* m_currentSong = nullptr;
+		float m_viewingYScroll = 0;
     };
 }
 

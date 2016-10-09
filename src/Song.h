@@ -6,26 +6,35 @@ namespace SR
 {
 	struct Note 
 	{
-		int32 Octave;
-		int32 SemiTone;
+		int32 Track = 0;
 
-		float Time;
-		float Duration;
+		int32 Octave = 0;
+		int32 SemiTone = 0;
+		int32 Base7 = 0;
+
+		double Time = 0;
+		double Duration = 0;
+
+		const char* GetName() const;
 	};
 
 	struct Sustain
 	{
-		float Time;
-		float Duration;
+		int32 Track = 0;
+
+		double Time;
+		double Duration;
 	};
 
 	struct Song
 	{
 		void Load(const String& file);
+		void SortEvents();
 
 		List<Note> m_notes;
 		List<Sustain> m_sustains;
 
-		int32 m_minPitch;
+		int32 m_minPitchBase7;
+		int32 m_maxPitchBase7;
 	};
 }
