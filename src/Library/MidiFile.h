@@ -116,6 +116,8 @@ class MidiFile {
       int       isDeltaTicks              (void);
       int       isAbsoluteTicks           (void);
 
+	  double	findSecondsPerTick		  (double time);
+
       // ticks-per-quarter related functions:
       void      setMillisecondTicks       (void);
       int       getTicksPerQuarterNote    (void);

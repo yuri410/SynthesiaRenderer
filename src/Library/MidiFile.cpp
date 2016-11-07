@@ -2466,7 +2466,42 @@ void MidiFile::buildTimeMap(void) {
 
 }
 
+double MidiFile::findSecondsPerTick(double time)
+{
+	int trackstate = getTrackState();
+	int timestate = getTickState();
 
+	absoluteTicks();
+	joinTracks();
+
+	int i;
+	int tpq = getTicksPerQuarterNote();
+	double defaultTempo = 120.0;
+	double secondsPerTick = 60.0 / (defaultTempo * tpq);
+
+	for (i = 0; i < getNumEvents(0); i++) 
+	{
+		// update the tempo if needed:
+		if (getEvent(0, i).isTempo())
+		{
+			secondsPerTick = getEvent(0, i).getTempoSPT(getTicksPerQuarterNote());
+		}
+
+		if (time > getEvent(0, i).seconds)
+		{
+			break;
+		}
+	}
+
+	// reset the states of the tracks or time values if necessary here:
+	if (timestate == TIME_STATE_DELTA) {
+		deltaTicks();
+	}
+	if (trackstate == TRACK_STATE_SPLIT) {
+		splitTracks();
+	}
+	return secondsPerTick;
+}
 
 //////////////////////////////
 //
