@@ -11,6 +11,85 @@ namespace SR
 	}
 	static void png_flusher(png_structp png_ptr) { }
 
+	struct PngSaveContextImpl
+	{ 
+		png_structp png_ptr;
+		png_infop info_ptr;
+	};
+
+	PngSaveContext* BeginStreamPng(int32 w, int32 h, FileOutStream& strm)
+	{
+		PngSaveContextImpl* c = (PngSaveContextImpl*)malloc(sizeof(PngSaveContextImpl));
+
+		c->png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+		assert(c->png_ptr);
+
+		c->info_ptr = png_create_info_struct(c->png_ptr);
+		assert(c->info_ptr);
+
+		png_init_io(c->png_ptr, NULL);
+
+		png_set_write_fn(c->png_ptr, &strm, png_data_writer, png_flusher);
+
+		png_set_IHDR(c->png_ptr, c->info_ptr, w, h, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
+		png_write_info(c->png_ptr, c->info_ptr);
+
+		return (PngSaveContext*)c;
+	}
+
+	void StreamInPng(PngSaveContext* ctx, RenderTarget* rt, int32 startY, int32 height, bool removeAlpha)
+	{
+		PngSaveContextImpl* c = (PngSaveContextImpl*)ctx;
+
+		Rectangle lockArea;
+		lockArea.X = 0;
+		lockArea.Y = startY;
+		lockArea.Width = rt->getWidth();
+		lockArea.Height = height;
+
+		DataRectangle dr = rt->Lock(LOCK_ReadOnly, lockArea);
+		uint32* row = new uint32[dr.getWidth()];
+		for (int32 i = 0; i < dr.getHeight(); i++)
+		{
+			memcpy(row, (char*)dr.getDataPointer() + i*dr.getPitch(), dr.getWidth() * sizeof(uint32));
+
+			// swap r & b
+			for (int32 j = 0; j < dr.getWidth(); j++)
+			{
+				byte* b = (byte*)(row + j);
+				byte* r = (byte*)(row + j) + 2;
+
+				byte t = *r;
+				*r = *b;
+				*b = t;
+
+				if (removeAlpha)
+				{
+					byte& a = *((byte*)(row + j) + 3);
+					a = 0xff;
+				}
+			}
+
+			png_write_row(c->png_ptr, (png_bytep)row);
+		}
+		rt->Unlock();
+
+		delete[] row; row = nullptr;
+	}
+
+	void EndStreamPng(PngSaveContext* ctx)
+	{
+		PngSaveContextImpl* c = (PngSaveContextImpl*)ctx;
+
+		png_write_end(c->png_ptr, NULL);
+
+		png_free_data(c->png_ptr, c->info_ptr, PNG_FREE_ALL, -1);
+		png_destroy_write_struct(&c->png_ptr, NULL);
+
+		free(c);
+	}
+
+
 	void SavePng(RenderTarget* rt, FileOutStream& strm, bool removeAlpha)
 	{
 		png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);

@@ -41,6 +41,8 @@ namespace SR
 		void Load(const String& file);
 		void SortEvents();
 
+		void Render(Sprite* sprite, float yScroll, float timeResolution);
+
 		List<Note> m_notes;
 		List<Sustain> m_sustains;
 		List<TrackInfo> m_tracks;
@@ -48,5 +50,9 @@ namespace SR
 
 		int32 m_minPitchBase7;
 		int32 m_maxPitchBase7;
+		double m_duration;
+
+	private:
+		void AppendBar(double duration);
 	};
 }

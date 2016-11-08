@@ -54,12 +54,10 @@ namespace SR
 	}
 
 
-	struct BarChangeInfo
+	struct BarModeInfo
 	{
 		int tick = 0;
 		int tickDuration = 0;
-		//double Time = 0;
-		//double Duration = 0;
 	};
 
 	void Song::Load(const String& file)
@@ -74,7 +72,7 @@ namespace SR
 			double onTime;
 		};
 
-		List<BarChangeInfo> barChanges;
+		List<BarModeInfo> barChanges;
 
 		int32 minPitch = -1;
 		int32 maxPitch = -1;
@@ -153,7 +151,7 @@ namespace SR
 
 						double quaterCount = time0 / (time1 / 4.0);
 
-						BarChangeInfo bi;
+						BarModeInfo bi;
 						bi.tick = m.tick;
 						bi.tickDuration = (int)(quaterCount * midi.getTicksPerQuarterNote());
 
@@ -190,17 +188,19 @@ namespace SR
 		base12ToBase7(minPitch, m_minPitchBase7, dummy);
 		base12ToBase7(maxPitch, m_maxPitchBase7, dummy);
 
+		m_duration = midi.getTotalTimeInSeconds();
+
 		if (barChanges.getCount() == 0)
 		{
 			// assume default 4/4 time
-			BarChangeInfo bi;
+			BarModeInfo bi;
 			bi.tick = 0;
 			bi.tickDuration = 4 * midi.getTicksPerQuarterNote();
 
 			barChanges.Add(bi);
 		}
 
-		// generate bar timings
+		// generate bar timings by simulating timeline
 		int totalLength = midi.getTotalTimeInTicks();
 		int barModeIdx = 0;
 		int eventIdx = 0;
@@ -213,9 +213,9 @@ namespace SR
 		double defaultTempo = 120.0;
 		double secondsPerTick = 60.0 / (defaultTempo * tpq);
 
-		if (clone[0][eventIdx].isTempo())
+		if (clone[0][0].isTempo())
 		{
-			secondsPerTick = clone[0][eventIdx].getTempoSPT(tpq);
+			secondsPerTick = clone[0][0].getTempoSPT(tpq);
 		}
 
 		double accumulatedLength = 0;
@@ -241,13 +241,10 @@ namespace SR
 					secondsPerTick = clone[0][eventIdx].getTempoSPT(tpq);
 				}
 			}
-
+			
 			if (accumulatedTicks >= barChanges[barModeIdx].tickDuration || barModeChanged)
 			{
-				if (m_bars.getCount())
-					m_bars.Add(m_bars.LastItem() + accumulatedLength);
-				else
-					m_bars.Add(accumulatedLength);
+				AppendBar(accumulatedLength);
 
 				accumulatedLength = 0;
 				accumulatedTicks = 0;
@@ -257,13 +254,21 @@ namespace SR
 			accumulatedLength += secondsPerTick;
 		}
 
+		// final bar
+		if (accumulatedTicks > 0)
+		{
+			AppendBar(accumulatedLength);
+		}
 	}
 
 	void Song::SortEvents()
 	{
 		m_notes.Sort([](const Note& a, const Note& b)
 		{
-			return OrderComparer(a.Time, b.Time);
+			if (a.Track == b.Track)
+				return OrderComparer(a.Time, b.Time);
+
+			return -OrderComparer(a.Track, b.Track);
 		});
 		m_sustains.Sort([](const Sustain& a, const Sustain& b)
 		{
@@ -320,5 +325,118 @@ namespace SR
 		{
 			return OrderComparer(a.MedianPitch, b.MedianPitch);
 		});
+	}
+
+	void Song::AppendBar(double duration)
+	{
+		if (m_bars.getCount())
+			m_bars.Add(m_bars.LastItem() + duration);
+		else
+			m_bars.Add(duration);
+	}
+
+
+	void Song::Render(Sprite* sprite, float yScroll, float timeResolution)
+	{
+		Viewport vp = sprite->getRenderDevice()->getViewport();
+		Size clSize(vp.Width, vp.Height);
+
+		Font* fnt = FontManager::getSingleton().getFont(L"Bender_Black_14_O");
+
+		struct
+		{
+			ColorValue face;
+			ColorValue face_a;
+			ColorValue bg;
+		} const colorSets[] =
+		{
+			{ 0xffa1e55c, 0xff569d11, 0xff202818 },
+			{ 0xff87aacf, 0xff376bae, 0xff293139 },
+		};
+
+		const int32 MaxKeyWidth = 35;
+
+		int32 minKeyCount = clSize.Width / MaxKeyWidth;
+
+		int32 minBase7 = m_minPitchBase7 - 2;
+		int32 maxBase7 = m_maxPitchBase7 + 2;
+
+		if (minBase7 < 0) minBase7 = 0;
+		if (maxBase7 <= minBase7) maxBase7 = minBase7 + 1;
+
+		int32 pitchCount7 = Math::Max(maxBase7 - minBase7, minKeyCount);
+		//int32 pitchSpan = m_currentSong->m_maxPitchBase7 - m_currentSong->m_minPitchBase7;
+
+		const double PitchRes = clSize.Width / pitchCount7;
+		const double timeRes = timeResolution;
+
+		for (const auto& b : m_bars)
+		{
+			Point startPt;
+			Point endPt;
+
+			startPt.X = 0; endPt.X = clSize.Width;
+			startPt.Y = endPt.Y = clSize.Height - (int32)((b - yScroll) * timeRes);
+
+			sprite->DrawLine(SystemUI::GetWhitePixel(), startPt, endPt, 0xff505050, 1, LineCapOptions::Butt);
+		}
+
+		int32 octaveCount = (maxBase7 - minBase7 + 6) / 7;
+
+		for (int32 i = 0; i < octaveCount; i++)
+		{
+			int xPos = 7 * i - minBase7;
+
+			Point startPt;
+			Point endPt;
+
+			startPt.Y = 0; endPt.Y = clSize.Height;
+			startPt.X = endPt.X = (int32)(xPos * PitchRes);
+
+			sprite->DrawLine(SystemUI::GetWhitePixel(), startPt, endPt, CV_Gray, 2, LineCapOptions::Butt);
+
+			xPos += 3;
+			startPt.X = endPt.X = (int32)(xPos * PitchRes);
+			sprite->DrawLine(SystemUI::GetWhitePixel(), startPt, endPt, CV_Gray, 1, LineCapOptions::Butt);
+		}
+
+		for (int i = m_notes.getCount() - 1; i >= 0; i--)
+		{
+			const Note& n = m_notes[i];
+
+			float xPos = (float)n.Base7 - minBase7;
+
+			if (n.Accidental)
+			{
+				xPos += n.Accidental*0.5f;
+			}
+
+			Rectangle area;
+			area.Y = clSize.Height - (int32)((n.Time - yScroll) * timeRes);
+			area.X = (int32)(xPos * PitchRes);
+			area.Width = n.Accidental ? PitchRes*0.6f : PitchRes;
+			area.Height = (int32)(n.Duration * timeRes);
+
+			area.Y -= area.Height;
+			area.X -= area.Width / 2;
+			area.X += PitchRes / 2;
+
+			const auto& colorSet = colorSets[n.Track & 1];
+
+			sprite->DrawRoundedRect(SystemUI::GetWhitePixel(), area, nullptr, 7.0f, 3, n.Accidental ? colorSet.face_a : colorSet.face);
+			sprite->DrawRoundedRectBorder(SystemUI::GetWhitePixel(), area, nullptr, 1.0f, 6.0f, 3, colorSet.bg);
+
+			Point labelPos = area.getBottomLeft();
+			String label = n.GetName();
+
+			Point labelSize = fnt->MeasureString(label);
+
+			labelPos.X += (area.Width - labelSize.X) / 2 - 2;
+			labelPos.Y -= labelSize.Y + 2;
+
+			fnt->DrawString(sprite, label, labelPos, CV_White);
+		}
+
+		sprite->Flush();
 	}
 }
