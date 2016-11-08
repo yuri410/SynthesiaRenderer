@@ -222,10 +222,13 @@ namespace SR
 		int accumulatedTicks = 0;
 		for (int t = 0; t < totalLength; t++)
 		{
+			bool barModeChanged = false;
+
 			while (barModeIdx < barChanges.getCount() - 1 &&
 				t >= barChanges[barModeIdx + 1].tick)
 			{
 				barModeIdx++;
+				barModeChanged = true;
 			}
 
 			while (eventIdx < clone[0].getSize() - 1 &&
@@ -239,7 +242,7 @@ namespace SR
 				}
 			}
 
-			if (accumulatedTicks >= barChanges[barModeIdx].tickDuration)
+			if (accumulatedTicks >= barChanges[barModeIdx].tickDuration || barModeChanged)
 			{
 				if (m_bars.getCount())
 					m_bars.Add(m_bars.LastItem() + accumulatedLength);
