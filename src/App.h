@@ -34,12 +34,16 @@ namespace SR
 
 		void Exit(MenuItem* c);
 
+		void MenuItem_ApplyPitchShift(MenuItem* c);
+		void UpdatePitchShiftOptionTexts();
+
 		void SetExport(const String& fp);
 
 		Form* m_aboutDlg;
 
 		MenuBar* m_mainMenu;
-		
+		SubMenu* m_pitchShiftMenu = nullptr;
+
 		ProgressBar* m_exportBar = nullptr;
 
 		Sprite* m_sprite;
@@ -47,6 +51,7 @@ namespace SR
 		String m_currentSongPath;
 		float m_viewingYScroll = 0;
 		float m_timeResolution = 100;
+		int32 m_pitchShift = 0;
 
 		MessageDialogBox* m_msgDlg_fileOverwrite = nullptr;
 		String m_choosenExportPath;
@@ -60,7 +65,7 @@ namespace SR
 	class ExportSession
 	{
 	public:
-		ExportSession(float timeRes, double songDuration, const String& exportPath, RenderTarget* exportBuffer);
+		ExportSession(float timeRes, double songDuration, int32 pitchShift, const String& exportPath, RenderTarget* exportBuffer);
 		~ExportSession();
 
 		void DoStep(Sprite* spr, RenderDevice* dev, RenderTarget* rt, Song* song);
@@ -82,6 +87,7 @@ namespace SR
 
 		float m_songDuration = 0;
 		float m_timeResolution = 0;
+		int32 m_pitchShift = 0;
 
 		struct PngSaveContext* m_pngSave = nullptr;
 

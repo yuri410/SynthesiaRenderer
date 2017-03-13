@@ -1,36 +1,12 @@
 #include "Song.h"
 #include "Library/MidiFile.h"
 
-namespace SR
+namespace
 {
-	const wchar_t* Note::GetName() const
-	{
-		switch (SemiTone)
-		{
-			case  0: return L"C";
-			case  1: return L"Db";
-			case  2: return L"D";
-			case  3: return L"Eb";
-			case  4: return L"E";
-			case  5: return L"F";
-			case  6: return L"F#";
-			case  7: return L"G";
-			case  8: return L"Ab";
-			case  9: return L"A";
-			case 10: return L"Bb";
-			case 11: return L"B";
-		}
-		return L"";
-	}
-
 	void base12ToBase7(int pitch, int& base7, int& accidental)
 	{
 		int octave = pitch / 12;
 		int chroma = pitch % 12;
-
-		octave -= 2;
-		if (octave < 0)
-			octave = 0;
 
 		accidental = 0;
 
@@ -53,6 +29,71 @@ namespace SR
 		base7 = output + 7 * octave;
 	}
 
+	int base7ToBase12(int base7, int accidental)
+	{
+		int n = base7 % 7;
+		int octave = base7 / 7;
+
+		switch (n)
+		{
+			case 0: return octave * 12 + accidental; // C, C#
+			case 1: return octave * 12 + 2; // D
+			case 2: return octave * 12 + 4 + accidental; // Eb, E
+			case 3: return octave * 12 + 5 + accidental; // F, F#
+			case 4: return octave * 12 + 7 + accidental; // G, G#
+			case 5: return octave * 12 + 9; // A
+			case 6: return octave * 12 + 11 + accidental; // B, Bb
+		}
+		return octave * 12;
+	}
+
+	void applyPitchShift(int& base7, int& accidental, int shift)
+	{
+		if (shift != 0)
+		{
+			int p = base7ToBase12(base7, accidental);
+			p += shift;
+			if (p < 0)p = 0;
+
+			base12ToBase7(p, base7, accidental);
+		}
+	}
+	void applyPitchShift(int& base7, int shift)
+	{
+		int dummy = 0;
+		applyPitchShift(base7, dummy, shift);
+	}
+}
+
+namespace SR
+{
+	const wchar_t* Note::GetName(int pitchShift) const
+	{
+		int32 st = SemiTone;
+
+		st += pitchShift;
+		if (st < 0)
+			st = 0;
+
+		st %= 12;
+
+		switch (st)
+		{
+			case  0: return L"C";
+			case  1: return L"Db";
+			case  2: return L"D";
+			case  3: return L"Eb";
+			case  4: return L"E";
+			case  5: return L"F";
+			case  6: return L"F#";
+			case  7: return L"G";
+			case  8: return L"Ab";
+			case  9: return L"A";
+			case 10: return L"Bb";
+			case 11: return L"B";
+		}
+		return L"";
+	}
 
 	struct BarModeInfo
 	{
@@ -103,12 +144,13 @@ namespace SR
 					n.Track = i;
 					n.Time = keyStates[key].onTime;
 					n.Duration = m.seconds - n.Time;
+
+					key -= 24;
+					if (key < 0)
+						key = 0;
+
 					n.Octave = key / 12;
 					n.SemiTone = key % 12;
-
-					n.Octave -= 2;
-					if (n.Octave < 0)
-						n.Octave = 0;
 
 					n.Base12 = key;
 					base12ToBase7(key, n.Base7, n.Accidental);
@@ -183,6 +225,9 @@ namespace SR
 		{
 			maxPitch = 80;
 		}
+
+		minPitch -= 24;
+		maxPitch -= 24;
 
 		int dummy;
 		base12ToBase7(minPitch, m_minPitchBase7, dummy);
@@ -336,7 +381,7 @@ namespace SR
 	}
 
 
-	void Song::Render(Sprite* sprite, float yScroll, float timeResolution)
+	void Song::Render(Sprite* sprite, float yScroll, float timeResolution, int32 pitchShift)
 	{
 		Viewport vp = sprite->getRenderDevice()->getViewport();
 		Size clSize(vp.Width, vp.Height);
@@ -361,14 +406,16 @@ namespace SR
 		int32 minBase7 = m_minPitchBase7 - 2;
 		int32 maxBase7 = m_maxPitchBase7 + 2;
 
+		applyPitchShift(minBase7, pitchShift);
+		applyPitchShift(maxBase7, pitchShift);
+
 		if (minBase7 < 0) minBase7 = 0;
 		if (maxBase7 <= minBase7) maxBase7 = minBase7 + 1;
 
 		int32 pitchCount7 = Math::Max(maxBase7 - minBase7, minKeyCount);
-		//int32 pitchSpan = m_currentSong->m_maxPitchBase7 - m_currentSong->m_minPitchBase7;
 
-		const double PitchRes = clSize.Width / pitchCount7;
-		const double timeRes = timeResolution;
+		const float PitchRes = (float)clSize.Width / pitchCount7;
+		const float timeRes = timeResolution;
 
 		for (const auto& b : m_bars)
 		{
@@ -404,30 +451,35 @@ namespace SR
 		{
 			const Note& n = m_notes[i];
 
-			float xPos = (float)n.Base7 - minBase7;
+			int32 base7 = n.Base7;
+			int32 accidental = n.Accidental;
 
-			if (n.Accidental)
+			applyPitchShift(base7, accidental, pitchShift);
+
+			float xPos = (float)base7 - minBase7;
+
+			if (accidental)
 			{
-				xPos += n.Accidental*0.5f;
+				xPos += accidental*0.5f;
 			}
 
 			Rectangle area;
 			area.Y = clSize.Height - (int32)((n.Time - yScroll) * timeRes);
 			area.X = (int32)(xPos * PitchRes);
-			area.Width = n.Accidental ? PitchRes*0.6f : PitchRes;
+			area.Width = Math::Round(accidental ? PitchRes*0.6f : PitchRes);
 			area.Height = (int32)(n.Duration * timeRes);
 
 			area.Y -= area.Height;
 			area.X -= area.Width / 2;
-			area.X += PitchRes / 2;
+			area.X += Math::Round(PitchRes / 2);
 
 			const auto& colorSet = colorSets[n.Track & 1];
 
-			sprite->DrawRoundedRect(SystemUI::GetWhitePixel(), area, nullptr, 7.0f, 3, n.Accidental ? colorSet.face_a : colorSet.face);
+			sprite->DrawRoundedRect(SystemUI::GetWhitePixel(), area, nullptr, 7.0f, 3, accidental ? colorSet.face_a : colorSet.face);
 			sprite->DrawRoundedRectBorder(SystemUI::GetWhitePixel(), area, nullptr, 1.0f, 6.0f, 3, colorSet.bg);
 
 			Point labelPos = area.getBottomLeft();
-			String label = n.GetName();
+			String label = n.GetName(pitchShift);
 
 			Point labelSize = fnt->MeasureString(label);
 

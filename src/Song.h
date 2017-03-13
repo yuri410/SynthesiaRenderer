@@ -17,7 +17,7 @@ namespace SR
 		double Time = 0;
 		double Duration = 0;
 
-		const wchar_t* GetName() const;
+		const wchar_t* GetName(int pitchShift) const;
 	};
 
 	struct Sustain
@@ -41,7 +41,7 @@ namespace SR
 		void Load(const String& file);
 		void SortEvents();
 
-		void Render(Sprite* sprite, float yScroll, float timeResolution);
+		void Render(Sprite* sprite, float yScroll, float timeResolution, int32 pitchShift);
 
 		List<Note> m_notes;
 		List<Sustain> m_sustains;
